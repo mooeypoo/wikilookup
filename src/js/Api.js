@@ -20,6 +20,7 @@
 		config = config || {};
 
 		this.cache = {};
+		this.promises = {};
 		this.standardURLs = {
 			restBase: 'https://{{lang}}.wikipedia.org/api/rest_v1/page/summary/{{pageName}}',
 			api: 'https://{{lang}}.wikipedia.org/w/api.php'
@@ -50,6 +51,11 @@
 			return $.Deferred().resolve( this.cache[ key ] );
 		}
 
+		if ( this.promises[ key ] ) {
+			// If this exists, the promise is already ongoing
+			return this.promises[ key ];
+		}
+
 		return this.fetch( pageName )
 			.then( this.updateCache.bind( this, pageName ) );
 	};
@@ -64,7 +70,10 @@
 	 *  problem fetching the data.
 	 */
 	Api.prototype.fetch = function ( pageName ) {
-		return $.ajax( this.getApiParams( pageName ) )
+		var self = this,
+			key = this.getCacheKey( pageName );
+
+		promise = $.ajax( this.getApiParams( pageName ) )
 			.then(
 				this.processApiResult.bind( this ),
 				// Failure
@@ -76,7 +85,13 @@
 				if ( result === 'error' ) {
 					return $.Deferred().reject( 'error' );
 				}
+			} )
+			.always( function () {
+				self.promises[ key ] = null;
 			} );
+
+		this.promises[ key ] = promise;
+		return promise;
 	};
 
 	/**
