@@ -1,0 +1,33 @@
+{
+  "name": "wikilookup",
+  "version": "0.1.0",
+  "description": "A tool to display info from Wikipedia (or private wikis) on selected terms in a webpage.",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "keywords": [
+    "wikipedia"
+  ],
+  "author": "Moriel Schottlender",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-config-wikimedia": "^0.5.0",
+    "grunt": "^1.0.2",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-cssmin": "^3.0.0",
+    "grunt-contrib-less": "^2.0.0",
+    "grunt-contrib-qunit": "^2.0.0",
+    "grunt-contrib-uglify": "^4.0.1",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-eslint": "20.1.0",
+    "qunit": "^2.6.1"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
+}
