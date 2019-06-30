@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<title>$.wikilookup Demo</title>
+    <script src="jquery-3.4.1.min.js"></script>
+	<script src="../dist/jquery.wikilookup-0.1.0.js"></script>
+	<link rel="stylesheet" href="../dist/jquery.wikilookup-0.1.0.min.css">
+
+	<!-- <script src="ooui/oojs.jquery.min.js"></script>
+	<script src="ooui/oojs-ui-core.min.js"></script>
+	<script src="ooui/oojs-ui-widgets.min.js"></script>
+	<script src="ooui/oojs-ui-wikimediaui.min.js"></script>
+
+	<link rel="stylesheet" href="ooui/oojs-ui-wikimediaui.min.css">
+	<link rel="stylesheet" href="ooui/oojs-ui-widgets-wikimediaui.min.css"> -->
+
+	<!-- demo -->
+	<!-- <link rel="stylesheet" href="demo.css"> -->
+	<style>
+		[data-wikilookup] {
+			border-bottom: 1px dashed #666;
+		}
+
+		.display {
+			background: white;
+			position: fixed;
+			bottom: 0;
+			padding: 1em;
+			border-top: 1px solid #666
+		}
+	</style>
+</head>
+<body>
+	<div class="intro">
+		<h1>$.wikiLookup popup demo</h1>
+	</div>
+
+	<div class="demoText">
+		<p><span data-wikilookup data-wl-source="restbase">Physics</span> (from <span data-wikilookup>Ancient Greek</span>: φυσική (ἐπιστήμη),
+			romanized: physikḗ (epistḗmē), lit. 'knowledge of nature', from φύσις phýsis "nature")[1][2][3] is the <span data-wikilookup>natural science</span> that studies matter,[4] its motion and behavior through space and
+			time, and that studies the related entities of energy and force.[5] Physics is one of the most fundamental <span data-wikilookup data-wl-title="Science">scientific disciplines</span>, and its main goal is to
+			understand how the <span data-wikilookup>universe</span> behaves
+		</p>
+
+		<p>Physics is one of the oldest academic disciplines and, through its inclusion of <span data-wikilookup>astronomy</span>, perhaps the oldest.[9] Over much of the past two millennia, physics, chemistry, biology, and certain branches of mathematics, were a part of natural philosophy, but during the Scientific Revolution in the 17th century these natural sciences emerged as unique research endeavors in their own right.[b] Physics intersects with many interdisciplinary areas of research, such as biophysics and quantum chemistry, and the boundaries of physics are not rigidly defined. New ideas in physics often explain the fundamental mechanisms studied by other sciences[6] and suggest new avenues of research in academic disciplines such as mathematics and philosophy.</p>
+
+		<p>Advances in <span data-wikilookup>physics</span> often enable advances in new technologies. For example, advances in the understanding of electromagnetism, solid-state physics, and nuclear physics led directly to the development of new products that have dramatically transformed modern-day society, such as television, computers, domestic appliances, and nuclear weapons;[6] advances in thermodynamics led to the development of industrialization; and advances in mechanics inspired the development of <span data-wikilookup>calculus</span> and here is a <span data-wikilookup>nonexistent</span> value from Wikipedia.</p>
+
+		<p><span data-wikilookup>SFO</span>
+	</p>
+	</div>
+
+	<div class="display"></div>
+
+	<script>
+		$( document ).ready( function () {
+			var $display = $( '.display' );
+
+			$( '.demoText' ).wikilookup( {
+				trigger: 'click' // Default, but make it explicit
+			} );
+
+			// Put the view in the display for this demo
+			$( '.demoText [data-wikilookup]' ).on( 'click', function () {
+				var widget = $( this ).data( 'wl-widget' );
+
+				$display.empty().append( widget.$element );
+			} );
+		} );
+	</script>
+</body>
+</html>
