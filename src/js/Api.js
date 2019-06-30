@@ -45,7 +45,8 @@
 	 * @return {Object} Page data
 	 */
 	Api.prototype.getPageInfo = function ( pageName ) {
-		var key = this.getCacheKey( pageName );
+		var self = this,
+			key = this.getCacheKey( pageName );
 
 		if ( this.cache[ key ] ) {
 			return $.Deferred().resolve( this.cache[ key ] );
@@ -57,7 +58,10 @@
 		}
 
 		return this.fetch( pageName )
-			.then( this.updateCache.bind( this, pageName ) );
+			.then( function ( result ) {
+				self.updateCache( pageName, result );
+				return result;
+			} );
 	};
 
 	/**
@@ -70,27 +74,35 @@
 	 *  problem fetching the data.
 	 */
 	Api.prototype.fetch = function ( pageName ) {
-		var self = this,
+		var promise,
+			self = this,
 			key = this.getCacheKey( pageName );
 
 		promise = $.ajax( this.getApiParams( pageName ) )
 			.then(
-				this.processApiResult.bind( this ),
+				// Success
+				function ( result ) {
+					self.promises[ key ] = null;
+					return self.processApiResult( result );
+				},
 				// Failure
 				function () {
+					self.promises[ key ] = null;
 					return 'error';
 				}
 			)
 			.then( function ( result ) {
+				self.promises[ key ] = null;
+
 				if ( result === 'error' ) {
 					return $.Deferred().reject( 'error' );
 				}
-			} )
-			.always( function () {
-				self.promises[ key ] = null;
+
+				return result;
 			} );
 
 		this.promises[ key ] = promise;
+
 		return promise;
 	};
 
@@ -116,7 +128,7 @@
 			return {
 				title: apiResult.displaytitle,
 				content: apiResult.extract,
-				thumbnail: apiResult.thumbnail,
+				thumbnail: apiResult.thumbnail || {},
 				url: apiResult.content_urls.desktop.page
 			};
 		}

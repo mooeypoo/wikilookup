@@ -1,3 +1,34 @@
 .wl-pageInfoWidget {
+	&-content-ready {
+		display: flex;
+	}
 
+	// Content from the API
+	&-view-content {
+		max-height: 200px;
+		overflow: auto;
+	}
+
+	&-state {
+		&-pending {
+			.wl-pageInfoWidget-content-error,
+			.wl-pageInfoWidget-content-ready {
+				display: none;
+			}
+		}
+
+		&-error {
+			.wl-pageInfoWidget-content-pending,
+			.wl-pageInfoWidget-content-ready {
+				display: none;
+			}
+		}
+
+		&-ready {
+			.wl-pageInfoWidget-content-pending,
+			.wl-pageInfoWidget-content-error {
+				display: none;
+			}
+		}
+	}
 }

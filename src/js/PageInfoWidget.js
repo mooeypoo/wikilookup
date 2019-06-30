@@ -21,7 +21,7 @@
 
 		this.messages = $.extend( {}, {
 			link: 'Read more',
-			pending: '',
+			pending: 'Loading...',
 			error: 'There was a problem loading this page information.'
 		}, config.messags );
 
@@ -84,15 +84,15 @@
 		// TODO: Allow giving the widget a previously built
 		// structure or template to use
 		return $( '<div>' )
+			.addClass( 'wl-pageInfoWidget-content-ready' )
 			.append(
-				this.$title,
 				$( '<div>' )
 					.addClass( 'wl-pageInfoWidget-box' )
-					.append( this.$content, this.$link ),
+					.append( this.$title, this.$content, this.$link ),
 				$( '<div>' )
 					.addClass( 'wl-pageInfoWidget-box' )
 					.append( this.$thumb )
-			).contents();
+			);
 	};
 
 	/**
@@ -101,11 +101,13 @@
 	 * @param  {Object} data Page data
 	 */
 	PageInfoWidget.prototype.setData = function ( data ) {
+		data = $.extend( { thumbnail: {} }, data );
+
 		this.$title.text( data.title );
 		this.$content.text( data.content );
 		this.$thumb.css( {
-			backgroundImage: 'url( ' + data.source + ' )',
-			width: data.width,
+			backgroundImage: 'url( ' + data.thumbnail.source + ' )',
+			width: data.thumbnail.width,
 			height: '100%',
 			backgroundRepeat: 'no-repeat',
 			backgroundSize: 'cover',
@@ -124,6 +126,7 @@
 		// TODO: Allow giving the widget a previously built
 		// structure or template to use
 		return $( '<div>' )
+			.addClass( 'wl-pageInfoWidget-content-pending' )
 			.append( this.messages.pending );
 	};
 
@@ -137,6 +140,7 @@
 		// TODO: Allow giving the widget a previously built
 		// structure or template to use
 		return $( '<div>' )
+			.addClass( 'wl-pageInfoWidget-content-error' )
 			.append( this.messages.error );
 	};
 

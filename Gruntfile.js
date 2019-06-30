@@ -92,7 +92,8 @@ module.exports = function Gruntfile( grunt ) {
 		'src/js/tools.js',
 		'src/js/Api.js',
 		'src/js/PageInfoWidget.js',
-		// 'src/js/jquery.wikilookup.js'
+		'src/js/Processor.js',
+		'src/js/wikilookup.js'
 	];
 	config.less.plain.files[ unifiedCSSFile ] = 'src/less/index.less';
 

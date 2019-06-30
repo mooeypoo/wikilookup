@@ -9,7 +9,7 @@
 	 *  cache. Consider using this if there are not many nodes in the given text;
 	 *  however, if there are a lot of nodes, this might create wasteful and
 	 *  unnecessary network calls.
-	 * @param {string} [config.selector] Selector to denote the nodes
+	 * @param {string} [config.selector='[data-wikilookup]'] Selector to denote the nodes
 	 *  in the given element that will be processed as wikilookup elements.
 	 * @param {Object} [config.sources] An optional definition of sources
 	 *  to fetch the data from. Defined sources can then be used by adding
@@ -34,7 +34,6 @@
 	 *    links back to the page's origins
 	 */
 	var Processor = function ( $container, config ) {
-		var self = this;
 		config = config || {};
 
 		this.$container = $container;
@@ -47,11 +46,12 @@
 		this.messages = config.messages || {};
 
 		this.$nodes = $();
-		this.triggerEventHandler = this.onTriggerEvent.bind( this );
+		this.sources = {};
+		this.trigger = null;
 
-		this.initialize();
+		this.initializeNodes();
 		this.initializeSources( config.sources );
-		this.setTrigger( config.trigger );
+		this.setUpdateTrigger( config.trigger );
 
 		if ( config.prefetch ) {
 			this.updateAllNodes();
@@ -73,28 +73,46 @@
 	 * Initialize the process by going over all nodes, normalize,
 	 * store their view objects, and prepare for fetching.
 	 */
-	Processor.prototype.initialize = function () {
+	Processor.prototype.initializeNodes = function () {
 		var self = this;
 
-		this.$container.find( this.selector )
+		this.$nodes = this.$container.find( this.selector )
 			.filter( function () {
 				var pageName = $( this ).attr( 'data-wl-title' ) || $( this ).text();
-				return !pageName.trim();
-			} )
-			.each( function () {
-				var widget,
-					pageName = $( this ).attr( 'data-wl-title' ) || $( this ).text();
-
-				// Normalize by adding this attribute to the node
-				$( this ).attr( 'data-wl-title', pageName );
-
-				// Create a view object and store it in a reference
-				widget = new $.wikilookup.PageInfoWidget( {
-					messages: self.messages
-				} );
-
-				$( this ).data( 'wl-widget', widget );
+				return !!pageName.trim();
 			} );
+
+		this.$nodes.each( function () {
+			var widget,
+				pageName = $( this ).attr( 'data-wl-title' ) || $( this ).text();
+
+			// Normalize by adding this attribute to the node
+			$( this ).attr( 'data-wl-title', pageName.trim() );
+
+			// Create a view object and store it in a reference
+			widget = new $.wikilookup.PageInfoWidget( {
+				messages: self.messages
+			} );
+
+			$( this ).data( 'wl-widget', widget );
+		} );
+	};
+
+	/**
+	 * Get the requested source. If source wasn't found, return
+	 * the default source.
+	 *
+	 * @param  {string} sourceName Requested source name
+	 * @return {$.wikilookup.Api} Source
+	 */
+	Processor.prototype.getSource = function ( sourceName ) {
+		sourceName = sourceName || 'default';
+
+		if ( !this.sources[ sourceName ] ) {
+			sourceName = 'default';
+		}
+
+		return this.sources[ sourceName ];
 	};
 
 	/**
@@ -104,7 +122,7 @@
 	 * @param  {Object} [sources] Source definition.
 	 */
 	Processor.prototype.initializeSources = function ( sources ) {
-		var def, api;
+		var def;
 
 		sources = $.extend( {}, sources );
 
@@ -125,7 +143,7 @@
 	 *
 	 * @param {string} [trigger='click'] Chosen jQuery event trigger
 	 */
-	Processor.prototype.setTrigger = function ( trigger ) {
+	Processor.prototype.setUpdateTrigger = function ( trigger ) {
 		var self = this,
 			legalTriggers = [ 'click', 'mouseenter' ];
 
@@ -141,11 +159,11 @@
 		this.getNodes().each( function () {
 			if ( self.trigger && self.trigger !== trigger ) {
 				// Remove the event from the previous triggers
-				$( this ).off( this.trigger, this.triggerEventHandler );
+				$( this ).off( self.trigger + '.wikilookupEvent' );
 			}
 
 			// Attach to the new trigger
-			$( this ).on( trigger, this.triggerEventHandler );
+			$( this ).on( trigger + '.wikilookupEvent', self.onTriggerEvent.bind( self, $( this ) ) );
 		} );
 
 		this.trigger = trigger;
@@ -161,15 +179,17 @@
 		var pageName = $node.attr( 'data-wl-title' ),
 			sourceName = $node.attr( 'data-wl-source' ) || 'default',
 			widget = $node.data( 'wl-widget' ),
-			inProgress = !!$node.data( 'wl-state-fetching' );
+			inProgress = !!$node.data( 'wl-state-fetching' ),
+			source = this.getSource( sourceName );
 
 		// This is already running.
 		// Even though the API will give us the same (still running)
 		// promise, we don't want to attach the .then's over and over
 		if ( inProgress ) { return; }
 
-		if ( !this.sources[ sourceName ] ) {
+		if ( !source ) {
 			// Source doesn't exist; bail out
+			// eslint-disable-next-line no-console
 			console.error( 'wikilookup error: Could not recognize source "' + sourceName + '".' );
 			return;
 		}
@@ -182,7 +202,7 @@
 		// Trigger fetching from the API; if the data was
 		// already fetched, this is a no-op, since it's cached
 		$node.data( 'wl-state-fetching', true );
-		this.sources[ sourceName ].getPageInfo( pageName )
+		source.getPageInfo( pageName )
 			.then(
 				// Success
 				function ( result ) {
@@ -206,7 +226,7 @@
 	 * Respond to the trigger event; trigger the API fetching
 	 * and update the view.
 	 *
-	 * @param  {jQuery} $node The jQuery element for the node
+	 * @param {jQuery} $node The jQuery element for the node
 	 */
 	Processor.prototype.onTriggerEvent = function ( $node ) {
 		this.updateWidget( $node );
@@ -229,6 +249,7 @@
 	 */
 	Processor.prototype.getAllTerms = function () {
 		var terms = [];
+
 		this.$nodes.each( function () {
 			terms.push( $( this ).attr( 'data-wl-title' ) );
 		} );
