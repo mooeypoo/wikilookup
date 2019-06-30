@@ -127,8 +127,8 @@
 			.then( function ( result ) {
 				self.promises[ key ] = null;
 
-				if ( result === 'error' ) {
-					return $.Deferred().reject( 'error' );
+				if ( result === 'error' || result === 'missing' ) {
+					return $.Deferred().reject( result );
 				}
 
 				return result;
@@ -172,6 +172,10 @@
 
 		if ( !data ) {
 			return 'error';
+		}
+
+		if ( data.missing !== undefined ) {
+			return 'missing';
 		}
 
 		return {
@@ -540,7 +544,7 @@
 		};
 
 		for ( def in sources ) {
-			this.sources[ def ] = new $.wikilookup.Api( sources.def );
+			this.sources[ def ] = new $.wikilookup.Api( sources[ def ] );
 		}
 	};
 

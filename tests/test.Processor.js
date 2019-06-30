@@ -36,4 +36,27 @@
 			);
 		} );
 	} );
+
+	QUnit.test( 'sources', function ( assert ) {
+		var source,
+			processor = new $.wikilookup.Processor( $( '<div>' ), {
+			sources: {
+				one: { lang: 'es' },
+				two: { baseURL: 'https://{{lang}}.privatewiki.com/w/api.php', lang: 'foo' },
+				three: {}
+			}
+		} );
+
+		assert.deepEqual(
+			Object.keys( processor.sources ),
+			[ 'default', 'one', 'two', 'three' ],
+			'All sources that have data instantiated.'
+		);
+
+		source = processor.getSource( 'one' );
+		assert.ok(
+			source instanceof $.wikilookup.Api,
+			'API details instantiated.'
+		);
+	} );
 }() );

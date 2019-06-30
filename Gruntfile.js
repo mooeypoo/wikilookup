@@ -56,28 +56,37 @@ module.exports = function Gruntfile( grunt ) {
 				},
 				// Set up below
 				files: {}
+			},
+			ooui: {
+				files: {
+					'demo/popup/ooui.widgets.js': [
+						'demo/popup/ooui/oojs-ui-core.js',
+						'demo/popup/ooui/oojs-ui-widgets.js',
+						'demo/popup/ooui/oojs-ui-wikimediaui.js'
+					]
+				}
 			}
 		},
 		uglify: {
 			options: { mangle: { reserved: [ 'jQuery', 'OO' ] } },
-			// ooui: {
-			// 	files: {
-			// 		'demo/ooui/oojs-ui-core.min.js': 'src/ooui/oojs-ui-core.js',
-			// 		'demo/ooui/oojs-ui-widgets.min.js': 'src/ooui/oojs-ui-widgets.js',
-			// 		'demo/ooui/oojs-ui-wikimediaui.min.js': 'src/ooui/oojs-ui-wikimediaui.js'
-			// 	}
-			// },
+			ooui: {
+				files: {
+					'demo/popup/ooui.widgets.min.js': 'demo/popup/ooui.widgets.js'
+				}
+			},
 			jquery: {
 				files: {}
 			},
 		},
 		cssmin: {
-			// ooui: {
-			// 	files: {
-			// 		'demo/ooui/oojs-ui-wikimediaui.min.css': 'demo/ooui/oojs-ui-wikimediaui.css',
-			// 		'demo/ooui/oojs-ui-widgets-wikimediaui.min.css': 'demo/ooui/oojs-ui-widgets-wikimediaui.css'
-			// 	}
-			// },
+			ooui: {
+				files: {
+					'demo/popup/oojs-ui-wikimediaui.min.css': 'demo/popup/ooui/oojs-ui-wikimediaui.css',
+					'demo/popup/oojs-ui-widgets-wikimediaui.min.css': 'demo/popup/ooui/oojs-ui-widgets-wikimediaui.css',
+					'demo/popup/oojs-ui-wikimediaui.rtl.min.css': 'demo/popup/ooui/oojs-ui-wikimediaui.rtl.css',
+					'demo/popup/oojs-ui-widgets-wikimediaui.rtl.min.css': 'demo/popup/ooui/oojs-ui-widgets-wikimediaui.rtl.css'
+				}
+			},
 			jquery: {
 				files: {}
 			}
@@ -106,6 +115,16 @@ module.exports = function Gruntfile( grunt ) {
 
 	grunt.registerTask( 'lint', [ 'eslint' ] );
 	grunt.registerTask( 'test', [ 'lint', 'qunit' ] );
-	grunt.registerTask( 'build', [ 'test', 'clean:js', 'less:plain', 'concat:jquery', 'uglify:jquery', 'cssmin:jquery' ] );
+	grunt.registerTask( 'build', [
+		'test',
+		'clean:js',
+		'less:plain',
+		'concat:jquery',
+		'uglify:jquery',
+		'cssmin:jquery',
+		'concat:ooui',
+		'uglify:ooui',
+		'cssmin:ooui'
+	] );
 	grunt.registerTask( 'default', 'build' );
 };

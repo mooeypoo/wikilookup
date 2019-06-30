@@ -132,7 +132,7 @@
 		};
 
 		for ( def in sources ) {
-			this.sources[ def ] = new $.wikilookup.Api( sources.def );
+			this.sources[ def ] = new $.wikilookup.Api( sources[ def ] );
 		}
 	};
 

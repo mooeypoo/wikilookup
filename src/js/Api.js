@@ -94,8 +94,8 @@
 			.then( function ( result ) {
 				self.promises[ key ] = null;
 
-				if ( result === 'error' ) {
-					return $.Deferred().reject( 'error' );
+				if ( result === 'error' || result === 'missing' ) {
+					return $.Deferred().reject( result );
 				}
 
 				return result;
@@ -139,6 +139,10 @@
 
 		if ( !data ) {
 			return 'error';
+		}
+
+		if ( data.missing !== undefined ) {
+			return 'missing';
 		}
 
 		return {
