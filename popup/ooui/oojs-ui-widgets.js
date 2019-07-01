@@ -8,7 +8,7 @@
  *
  * Date: 2019-06-27T00:07:02Z
  */
-( function ( OO ) {
+( function ( OO, $ ) {
 
 'use strict';
 
@@ -6134,6 +6134,6 @@ OO.ui.SearchWidget.prototype.getResults = function () {
 	return this.results;
 };
 
-}( OO ) );
+}( OO, jQuery ) );
 
 //# sourceMappingURL=oojs-ui-widgets.js.map.json

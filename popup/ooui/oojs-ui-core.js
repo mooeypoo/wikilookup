@@ -1,3 +1,4 @@
+( function ( $ ) {
 /*!
  * OOUI v0.32.1-pre (eb5bfb2925)
  * https://www.mediawiki.org/wiki/OOUI
@@ -13557,5 +13558,5 @@ OO.ui.SelectFileInputWidget.prototype.setDisabled = function ( disabled ) {
 };
 
 }( OO ) );
-
+}( jQuery ) );
 //# sourceMappingURL=oojs-ui-core.js.map.json
