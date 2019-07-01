@@ -58,17 +58,17 @@ function wikilookup_shortcode( $atts , $content = null ) {
 
 function wikilookup_scripts() {
 	$scripts = [
-		'js' => 'lib/jquery.wikilookup.js',
-		'oojs' => 'lib/oojs.jquery.min.js',
-		'ooui' => 'lib/ooui.widgets.min.js',
-		// 'popup' => 'js/wikilookup.popup.js',
+		'js' => 'assets/lib/jquery.wikilookup.js',
+		'oojs' => 'assets/lib/oojs.jquery.min.js',
+		'ooui' => 'assets/lib/ooui.widgets.min.js',
+		'popup' => 'assets/popup/wikilookup.popup.js',
 	];
 
 	$styles = [
-		'wikimediaui' => 'lib/oojs-ui-wikimediaui.min.css',
-		'widgets.wikimediaui' => 'lib/oojs-ui-widgets-wikimediaui.min.css',
-		'wikilookup' => 'lib/jquery.lookup.min.css',
-		// 'popup' => 'popup/wikilookup.popup.css',
+		'wikimediaui' => 'assets/lib/oojs-ui-wikimediaui.min.css',
+		'widgets.wikimediaui' => 'assets/lib/oojs-ui-widgets-wikimediaui.min.css',
+		'wikilookup' => 'assets/lib/jquery.lookup.min.css',
+		'popup' => 'assets/popup/wikilookup.popup.css',
 	];
 
 	foreach ( $scripts as $name => $src ) {
