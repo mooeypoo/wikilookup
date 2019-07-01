@@ -11,6 +11,7 @@ module.exports = function Gruntfile( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-clean' );
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
 	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
 	config = {
 		pkg: pkg,
@@ -90,12 +91,19 @@ module.exports = function Gruntfile( grunt ) {
 			jquery: {
 				files: {}
 			}
+		},
+		copy: {
+			wordpress: {
+				files: {}
+			}
 		}
 	};
 
 	// Set up filenames with versioning
 	unifiedJSFile = 'dist/jquery.wikilookup-' + pkg.version + '.js';
-	unifiedCSSFile = 'dist/jquery.wikilookup-' + pkg.version + '.plain.css';
+	unifiedCSSFile = 'dist/jquery.wikilookup-' + pkg.version + '.css';
+	unifiedJSFileMinimized = 'dist/jquery.wikilookup-' + pkg.version + '.min.js';
+	unifiedCSSFileMinimized = 'dist/jquery.wikilookup-' + pkg.version + '.min.css';
 	config.concat.jquery.files[ unifiedJSFile ] = [
 		'src/js/namespace.js',
 		'src/js/tools.js',
@@ -107,8 +115,14 @@ module.exports = function Gruntfile( grunt ) {
 	config.less.plain.files[ unifiedCSSFile ] = 'src/less/index.less';
 
 	// Minify
-	config.uglify.jquery.files[ 'dist/jquery.wikilookup-' + pkg.version + '.min.js' ] = unifiedJSFile;
-	config.cssmin.jquery.files[ 'dist/jquery.wikilookup-' + pkg.version + '.min.css' ] = unifiedCSSFile;
+	config.uglify.jquery.files[ unifiedJSFileMinimized ] = unifiedJSFile;
+	config.cssmin.jquery.files[ unifiedCSSFileMinimized ] = unifiedCSSFile;
+
+	// Copy to wordpress plugin
+	config.copy.wordpress.files = [
+		{ src: unifiedJSFileMinimized, dest: 'wordpress-plugin/lib/jquery.wikilookup.min.js' },
+		{ src: unifiedCSSFileMinimized, dest: 'wordpress-plugin/lib/jquery.wikilookup.min.css' }
+	];
 
 	// Initialize config
 	grunt.initConfig( config );
@@ -124,7 +138,8 @@ module.exports = function Gruntfile( grunt ) {
 		'cssmin:jquery',
 		'concat:ooui',
 		'uglify:ooui',
-		'cssmin:ooui'
+		'cssmin:ooui',
+		'copy:wordpress'
 	] );
 	grunt.registerTask( 'default', 'build' );
 };
