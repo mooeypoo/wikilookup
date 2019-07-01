@@ -1,4 +1,4 @@
-( function () {
+( function ( $ ) {
 	/**
 	 * Processor class to process the relevant nodes in the given element
 	 *
@@ -259,4 +259,4 @@
 
 	// Export to namespace
 	$.wikilookup.Processor = Processor;
-}() );
+}( jQuery ) );

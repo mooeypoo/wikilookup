@@ -11,3 +11,7 @@
 .wl-pageInfoWidget-content-error {
 	padding: 1em;
 }
+
+.wl-pageInfoWidget-view-title {
+	font-size: 1.2em;
+}

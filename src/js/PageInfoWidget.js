@@ -1,4 +1,4 @@
-( function () {
+( function ( $ ) {
 	/**
 	 * Page info widget
 	 *
@@ -146,4 +146,4 @@
 
 	// Export to namespace
 	$.wikilookup.PageInfoWidget = PageInfoWidget;
-}() );
+}( jQuery ) );

@@ -1,4 +1,4 @@
-( function () {
+( function ( $ ) {
 	$.wikilookup.tools = {
 		/**
 		 * Get the value of a nested property in an object,
@@ -21,4 +21,4 @@
 			return val;
 		}
 	};
-}() );
+}( jQuery ) );

@@ -1,4 +1,4 @@
-( function () {
+( function ( $ ) {
 	/**
 	 * API class to fetch page information from the API, either by mediawiki api or restbase
 	 *
@@ -225,4 +225,4 @@
 
 	// Export to namespace
 	$.wikilookup.Api = Api;
-}() );
+}( jQuery ) );

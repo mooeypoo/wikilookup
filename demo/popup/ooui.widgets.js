@@ -1,3 +1,5 @@
+( function ( $ ) {
+
 /*!
  * OOUI v0.32.1-pre (eb5bfb2925)
  * https://www.mediawiki.org/wiki/OOUI
@@ -19820,3 +19822,5 @@ OO.ui.theme = new OO.ui.WikimediaUITheme();
 }( OO ) );
 
 //# sourceMappingURL=oojs-ui-wikimediaui.js.map.json
+
+}( jQuery ) );

@@ -1,4 +1,3 @@
-( function ( $ ) {
 /*!
  * OOUI v0.32.1-pre (eb5bfb2925)
  * https://www.mediawiki.org/wiki/OOUI
@@ -9,7 +8,7 @@
  *
  * Date: 2019-06-27T00:07:02Z
  */
-( function ( OO ) {
+( function ( OO, $ ) {
 
 'use strict';
 
@@ -13557,6 +13556,5 @@ OO.ui.SelectFileInputWidget.prototype.setDisabled = function ( disabled ) {
 	return this;
 };
 
-}( OO ) );
-}( jQuery ) );
+}( OO, jQuery ) );
 //# sourceMappingURL=oojs-ui-core.js.map.json

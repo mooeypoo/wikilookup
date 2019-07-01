@@ -40,20 +40,7 @@ module.exports = function Gruntfile( grunt ) {
 		concat: {
 			jquery: {
 				options: {
-					// banner: grunt.file.read( 'build/header.jquery.wikilookup.txt' ),
-					// Remove wrapping IIFE ( function () {}() );\n
-					process: function ( src, filepath ) {
-						// Only remove the end if we're removing the starting (function () { ... wrapper
-						if ( new RegExp( /^\( function \(\) {/ ).test( src ) ) {
-							src = src
-								.replace( /^\( function \(\) {/, '' ) // Beginning of file
-								.replace( /}\(\) \);\n$/, '' );
-						}
-						// eslint-disable-next-line quotes
-						return '/* >> Starting source: ' + filepath + " << */\n" +
-							src +
-							'/* >> End source: ' + filepath + ' << */';
-					}
+					// banner: grunt.file.read( 'build/header.jquery.wikilookup.txt' )
 				},
 				// Set up below
 				files: {}
@@ -61,9 +48,21 @@ module.exports = function Gruntfile( grunt ) {
 			ooui: {
 				files: {
 					'demo/popup/ooui.widgets.js': [
+						'demo/popup/ooui/open.js',
 						'demo/popup/ooui/oojs-ui-core.js',
 						'demo/popup/ooui/oojs-ui-widgets.js',
-						'demo/popup/ooui/oojs-ui-wikimediaui.js'
+						'demo/popup/ooui/oojs-ui-wikimediaui.js',
+						'demo/popup/ooui/close.js'
+					]
+				}
+			},
+			wordpress: {
+				files: {
+					'wordpress-plugin/assets/wikilookup.unified.js': [
+						// 'wordpress-plugin/assets/lib/oojs.jquery.min.js',
+						'wordpress-plugin/assets/lib/oojs.jquery.js',
+						'wordpress-plugin/assets/lib/ooui.widgets.min.js',
+						'wordpress-plugin/assets/lib/jquery.wikilookup.min',
 					]
 				}
 			}
@@ -112,17 +111,18 @@ module.exports = function Gruntfile( grunt ) {
 		'src/js/Processor.js',
 		'src/js/wikilookup.js'
 	];
+
 	config.less.plain.files[ unifiedCSSFile ] = 'src/less/index.less';
 
 	// Minify
 	config.uglify.jquery.files[ unifiedJSFileMinimized ] = unifiedJSFile;
 	config.cssmin.jquery.files[ unifiedCSSFileMinimized ] = unifiedCSSFile;
 
-	// Copy to wordpress plugin
-	config.copy.wordpress.files = [
-		{ src: unifiedJSFileMinimized, dest: 'wordpress-plugin/lib/jquery.wikilookup.min.js' },
-		{ src: unifiedCSSFileMinimized, dest: 'wordpress-plugin/lib/jquery.wikilookup.min.css' }
-	];
+	// // Copy to wordpress plugin
+	// config.copy.wordpress.files = [
+	// 	{ src: unifiedJSFileMinimized, dest: 'wordpress-plugin/assets/lib/jquery.wikilookup.min.js' },
+	// 	{ src: unifiedCSSFileMinimized, dest: 'wordpress-plugin/assets/lib/jquery.wikilookup.min.css' }
+	// ];
 
 	// Initialize config
 	grunt.initConfig( config );
@@ -139,7 +139,8 @@ module.exports = function Gruntfile( grunt ) {
 		'concat:ooui',
 		'uglify:ooui',
 		'cssmin:ooui',
-		'copy:wordpress'
+		'copy:wordpress',
+		'concat:wordpress'
 	] );
 	grunt.registerTask( 'default', 'build' );
 };

@@ -1,4 +1,4 @@
-( function () {
+( function ( $ ) {
 	/**
 	 * jQuery plugin for wikilookup
 	 *
@@ -11,4 +11,4 @@
 		// Store instance
 		$( this ).data( 'wl-processor', processor );
 	};
-}() );
+}( jQuery ) );
