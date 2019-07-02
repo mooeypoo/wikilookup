@@ -178,6 +178,7 @@
 		// Get the correct API object according to the source
 		var pageName = $node.attr( 'data-wl-title' ),
 			sourceName = $node.attr( 'data-wl-source' ) || 'default',
+			lang = $node.attr( 'data-wl-lang' ),
 			widget = $node.data( 'wl-widget' ),
 			inProgress = !!$node.data( 'wl-state-fetching' ),
 			source = this.getSource( sourceName );
@@ -202,7 +203,7 @@
 		// Trigger fetching from the API; if the data was
 		// already fetched, this is a no-op, since it's cached
 		$node.data( 'wl-state-fetching', true );
-		source.getPageInfo( pageName )
+		source.getPageInfo( pageName, lang )
 			.then(
 				// Success
 				function ( result ) {

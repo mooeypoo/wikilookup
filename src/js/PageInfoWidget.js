@@ -114,6 +114,7 @@
 			backgroundPosition: 'center'
 		} );
 		this.$link.attr( 'href', data.url );
+		this.$element.attr( 'dir', data.dir || 'ltr' );
 	};
 
 	/**

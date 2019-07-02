@@ -10,6 +10,9 @@
   overflow: auto;
   margin-bottom: 0.5em;
 }
+.wl-pageInfoWidget-box:first-child {
+  padding: 0.5em;
+}
 .wl-pageInfoWidget-state-pending .wl-pageInfoWidget-content-error,
 .wl-pageInfoWidget-state-pending .wl-pageInfoWidget-content-ready {
   display: none;

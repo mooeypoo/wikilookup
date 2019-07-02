@@ -72,10 +72,11 @@
 	/**
 	 * Get the info for the requested page
 	 *
-	 * @param  {string} pageName Requested page
+	 * @param {string} pageName Requested page
+	 * @param {string} [lang] Optional language override
 	 * @return {Object} Page data
 	 */
-	Api.prototype.getPageInfo = function ( pageName ) {
+	Api.prototype.getPageInfo = function ( pageName, lang ) {
 		var self = this,
 			key = this.getCacheKey( pageName );
 
@@ -88,7 +89,7 @@
 			return this.promises[ key ];
 		}
 
-		return this.fetch( pageName )
+		return this.fetch( pageName, lang )
 			.then( function ( result ) {
 				self.updateCache( pageName, result );
 				return result;
@@ -99,17 +100,18 @@
 	 * Fetch information from the API
 	 *
 	 * @private
-	 * @param  {string} pageName Page name
+	 * @param {string} pageName Page name
+	 * @param {string} [lang] Optional language override
 	 * @return {jQuery.Promise} Promise that is resolved when the data
 	 *  is available from the API, or is rejected if there was any
 	 *  problem fetching the data.
 	 */
-	Api.prototype.fetch = function ( pageName ) {
+	Api.prototype.fetch = function ( pageName, lang ) {
 		var promise,
 			self = this,
 			key = this.getCacheKey( pageName );
 
-		promise = $.ajax( this.getApiParams( pageName ) )
+		promise = $.ajax( this.getApiParams( pageName, lang ) )
 			.then(
 				// Success
 				function ( result ) {
@@ -160,7 +162,8 @@
 				title: apiResult.displaytitle,
 				content: apiResult.extract,
 				thumbnail: apiResult.thumbnail || {},
-				url: apiResult.content_urls.desktop.page
+				url: apiResult.content_urls.desktop.page,
+				dir: apiResult.dir || 'ltr'
 			};
 		}
 
@@ -180,7 +183,8 @@
 			title: data.title,
 			content: data.extract,
 			thumbnail: data.thumbnail,
-			url: data.canonicalurl
+			url: data.canonicalurl,
+			dir: data.pagelanguagedir || 'ltr'
 		};
 	};
 
@@ -214,15 +218,16 @@
 	 * including the full URL endpoint, data, and
 	 * ajax options.
 	 *
-	 * @param  {string} pageName Requested page name
+	 * @param {string} pageName Requested page name
+	 * @param {string} [lang] An optional language override
 	 * @return {Object} Ajax definition object
 	 */
-	Api.prototype.getApiParams = function ( pageName ) {
+	Api.prototype.getApiParams = function ( pageName, lang ) {
 		var apiURL = this.baseURL;
 
 		apiURL = apiURL
 			.replace(
-				'{{lang}}', encodeURIComponent( this.lang )
+				'{{lang}}', encodeURIComponent( lang || this.lang )
 			)
 			.replace(
 				'{{pageName}}', encodeURIComponent( pageName )
@@ -374,6 +379,7 @@
 			backgroundPosition: 'center'
 		} );
 		this.$link.attr( 'href', data.url );
+		this.$element.attr( 'dir', data.dir || 'ltr' );
 	};
 
 	/**
@@ -588,6 +594,7 @@
 		// Get the correct API object according to the source
 		var pageName = $node.attr( 'data-wl-title' ),
 			sourceName = $node.attr( 'data-wl-source' ) || 'default',
+			lang = $node.attr( 'data-wl-lang' ),
 			widget = $node.data( 'wl-widget' ),
 			inProgress = !!$node.data( 'wl-state-fetching' ),
 			source = this.getSource( sourceName );
@@ -612,7 +619,7 @@
 		// Trigger fetching from the API; if the data was
 		// already fetched, this is a no-op, since it's cached
 		$node.data( 'wl-state-fetching', true );
-		source.getPageInfo( pageName )
+		source.getPageInfo( pageName, lang )
 			.then(
 				// Success
 				function ( result ) {

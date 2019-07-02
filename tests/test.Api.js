@@ -157,7 +157,8 @@
 						width: 300,
 						height:217
 					},
-					url: 'https://en.wikipedia.org/wiki/Physics'
+					url: 'https://en.wikipedia.org/wiki/Physics',
+					dir: 'ltr'
 				},
 				restbase: {
 					title: 'Physics',
@@ -169,7 +170,8 @@
 						width: 320,
 						height:231
 					},
-					url: 'https://en.wikipedia.org/wiki/Physics'
+					url: 'https://en.wikipedia.org/wiki/Physics',
+					dir: 'ltr'
 				}
 			},
 			apiResults = {
