@@ -135,12 +135,12 @@ module.exports = function Gruntfile( grunt ) {
 		'less:plain',
 		'concat:jquery',
 		'uglify:jquery',
-		'cssmin:jquery',
-		'concat:ooui',
-		'uglify:ooui',
-		'cssmin:ooui',
-		'copy:wordpress',
-		'concat:wordpress'
+		'cssmin:jquery'
+		// 'concat:ooui',
+		// 'uglify:ooui',
+		// 'cssmin:ooui'
+		// 'copy:wordpress',
+		// 'concat:wordpress'
 	] );
 	grunt.registerTask( 'default', 'build' );
 };

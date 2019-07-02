@@ -1,9 +1,14 @@
 .wl-pageInfoWidget-content-ready {
   display: flex;
 }
+.wl-pageInfoWidget-view-title {
+  font-size: 1.2em;
+  padding-bottom: 0.5em;
+}
 .wl-pageInfoWidget-view-content {
   max-height: 200px;
   overflow: auto;
+  margin-bottom: 0.5em;
 }
 .wl-pageInfoWidget-state-pending .wl-pageInfoWidget-content-error,
 .wl-pageInfoWidget-state-pending .wl-pageInfoWidget-content-ready {

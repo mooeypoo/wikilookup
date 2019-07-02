@@ -333,7 +333,7 @@
 	 * @return {jQuery} Info view
 	 */
 	PageInfoWidget.prototype.buildView = function () {
-		this.$title = $( '<h1>' ).addClass( 'wl-pageInfoWidget-view-title' );
+		this.$title = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-title' );
 		this.$content = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-content' );
 		this.$thumb = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-thumb' );
 		this.$link = $( '<a>' )
