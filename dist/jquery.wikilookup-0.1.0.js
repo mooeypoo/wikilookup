@@ -67,6 +67,8 @@
 				this.standardURLs.restBase :
 				this.standardURLs.api;
 		}
+
+		this.isWikipedia = !!this.baseURL.match( /https:\/\/(.+)\.wikipedia.org/ );
 	};
 
 	/**
@@ -163,7 +165,8 @@
 				content: apiResult.extract,
 				thumbnail: apiResult.thumbnail || {},
 				url: apiResult.content_urls.desktop.page,
-				dir: apiResult.dir || 'ltr'
+				dir: apiResult.dir || 'ltr',
+				wikipedia: this.isWikipedia
 			};
 		}
 
@@ -184,7 +187,8 @@
 			content: data.extract,
 			thumbnail: data.thumbnail,
 			url: data.canonicalurl,
-			dir: data.pagelanguagedir || 'ltr'
+			dir: data.pagelanguagedir || 'ltr',
+			wikipedia: this.isWikipedia
 		};
 	};
 
@@ -380,6 +384,7 @@
 		} );
 		this.$link.attr( 'href', data.url );
 		this.$element.attr( 'dir', data.dir || 'ltr' );
+		this.$element.toggleClass( 'wl-pageInfoWidget-wikipedia', !!data.wikipedia );
 	};
 
 	/**

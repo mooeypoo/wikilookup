@@ -1,23 +1,49 @@
 .wl-pageInfoWidget {
-	&-content-ready {
-		display: flex;
-	}
-
 	&-view-title {
 		font-size: 1.2em;
 		padding-bottom: 0.5em;
 	}
 
-	// Content from the API
+	&-content-pending,
+	&-content-error {
+		padding: 1em;
+	}
+
+	&-content-ready {
+		display: flex;
+
+		.wl-pageInfoWidget-box {
+			z-index: 1;
+			&:first-child {
+				padding: 1em 0 1em 1em;
+
+				[dir="rtl"] & {
+					padding: 1em 1em 1em 0;
+				}
+			}
+		}
+
+		.wl-pageInfoWidget-wikipedia &:before {
+			display: block;
+			position: absolute;
+			z-index: 0;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.4;
+			content: ' ';
+			.wl-wikipedia-logo( 50%, 30%, -10% );
+		}
+	}
+
+	// Presented text box
 	&-view-content {
 		max-height: 200px;
 		overflow: auto;
 		margin-bottom: 0.5em;
 	}
 
-	&-box:first-child {
-		padding: 0.5em;
-	}
 
 	&-state {
 		&-pending {
