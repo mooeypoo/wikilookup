@@ -4,8 +4,8 @@
 	<meta charset="UTF-8">
 	<title>$.wikilookup Demo</title>
     <script src="jquery-3.4.1.min.js"></script>
-	<script src="../dist/jquery.wikilookup-0.1.0.js"></script>
-	<link rel="stylesheet" href="../dist/jquery.wikilookup-0.1.0.min.css">
+	<script src="../dist/jquery.wikilookup-1.0.0.js"></script>
+	<link rel="stylesheet" href="../dist/jquery.wikilookup-1.0.0.min.css">
 
 	<script src="popup/oojs.jquery.min.js"></script>
 	<script src="popup/ooui.widgets.min.js"></script>
@@ -46,6 +46,9 @@
 			var $display = $( '.display' );
 
 			$( '.demoText' ).wikilookup( {
+				messages: {
+					link: 'Read more of this'
+				},
 				trigger: 'click', // Default, but make it explicit
 				sources: {
 					spanish: {

@@ -23,7 +23,7 @@
 			link: 'Read more',
 			pending: 'Loading...',
 			error: 'There was a problem loading this page information.'
-		}, config.messags );
+		}, config.messages );
 
 		this.$pending = this.buildPending();
 		this.$view = this.buildView();
@@ -78,6 +78,7 @@
 		this.$thumb = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-thumb' );
 		this.$link = $( '<a>' )
 			.addClass( 'wl-pageInfoWidget-view-link' )
+			.attr( 'target', '_blank' )
 			.append( this.messages.link );
 
 		// Build the widget
