@@ -1,0 +1,22 @@
+.wl-footerWidget {
+	display: flex;
+	justify-content: space-between;
+	padding: 0.5em;
+	border-top: 1px solid #ccc;
+	font-size: 0.8em;
+	// For now, we don't do translations for the interface
+	// so let's make sure this is rendering the same whether
+	// the API result is in RTL or LTR
+	direction: ltr;
+
+	&-articleHistory {
+	}
+
+	&-wikimedia {
+		display: flex;
+
+		& > div:not(:first-child) {
+			margin-left: 1em;
+		}
+	}
+}

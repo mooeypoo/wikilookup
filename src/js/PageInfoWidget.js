@@ -29,6 +29,8 @@
 		this.$view = this.buildView();
 		this.$error = this.buildError();
 
+		this.footer = new $.wikilookup.FooterWidget( { messages: this.messages } );
+
 		// Initialize
 		this.setState( 'pending' );
 		this.$element
@@ -36,7 +38,8 @@
 			.append(
 				this.$pending,
 				this.$error,
-				this.$view
+				this.$view,
+				this.footer.$element
 			);
 	};
 
@@ -116,6 +119,11 @@
 		} );
 		this.$link.attr( 'href', data.url );
 		this.$element.attr( 'dir', data.dir || 'ltr' );
+
+		// Update footer links
+		this.footer.updateHistoryLink( data.history );
+		this.footer.updateArticleLink( data.url );
+
 		this.$element.toggleClass( 'wl-pageInfoWidget-wikipedia', !!data.wikipedia );
 	};
 

@@ -4,6 +4,10 @@
 		padding-bottom: 0.5em;
 	}
 
+	&-view-link {
+		display: none;
+	}
+
 	&-content-pending,
 	&-content-error {
 		padding: 1em;
@@ -16,6 +20,7 @@
 			z-index: 2;
 
 			&:first-child {
+				position: relative;
 				padding: 1em 0 1em 1em;
 
 				[dir="rtl"] & {
@@ -44,9 +49,9 @@
 						top: 0;
 						width: 100%;
 						height: 100%;
-						opacity: 0.8;
+						opacity: 0.5;
 						content: ' ';
-						.wl-wikipedia-logo( 10%, 0.5em, 0.5em );
+						.wl-wikipedia-logo( auto, 0.5em, 0.5em );
 
 					}
 				}

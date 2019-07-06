@@ -158,6 +158,7 @@
 						height:217
 					},
 					url: 'https://en.wikipedia.org/wiki/Physics',
+					history: 'https://en.wikipedia.org/wiki/Physics?action=history',
 					dir: 'ltr',
 					wikipedia: true
 				},
@@ -172,6 +173,7 @@
 						height:231
 					},
 					url: 'https://en.wikipedia.org/wiki/Physics',
+					history: 'https://en.wikipedia.org/wiki/Physics?action=history',
 					dir: 'ltr',
 					wikipedia: true
 				}

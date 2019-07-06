@@ -107,6 +107,7 @@ module.exports = function Gruntfile( grunt ) {
 		'src/js/namespace.js',
 		'src/js/tools.js',
 		'src/js/Api.js',
+		'src/js/FooterWidget.js',
 		'src/js/PageInfoWidget.js',
 		'src/js/Processor.js',
 		'src/js/wikilookup.js'

@@ -165,6 +165,7 @@
 				content: apiResult.extract,
 				thumbnail: apiResult.thumbnail || {},
 				url: apiResult.content_urls.desktop.page,
+				history: apiResult.content_urls.desktop.revisions,
 				dir: apiResult.dir || 'ltr',
 				wikipedia: this.isWikipedia
 			};
@@ -187,6 +188,7 @@
 			content: data.extract,
 			thumbnail: data.thumbnail,
 			url: data.canonicalurl,
+			history: data.fullurl + '?action=history',
 			dir: data.pagelanguagedir || 'ltr',
 			wikipedia: this.isWikipedia
 		};
@@ -269,6 +271,84 @@
 
 ( function ( $ ) {
 	/**
+	 * Footer widget
+	 *
+	 * @class $.wikilookup.FooterWidget
+	 *
+	 * @constructor
+	 * @param {Object} config Configuration options
+	 */
+	var FooterWidget = function ( config ) {
+		config = $.extend( {}, config );
+
+		this.$element = config.$element || $( '<div>' );
+		this.messages = $.extend( {}, {
+			articleHistory: 'Contribution history',
+			articleLink: 'Go to the original article',
+			wikimediaIntro: 'Help us improve Wikipedia',
+			wikimediaParticipate: 'Participate',
+			wikimediaSupport: 'Support'
+		}, config.messages );
+
+		this.$articleHistory = $( '<a>' )
+			.addClass( 'wl-footerWidget-articleHistory-link' )
+			.attr( 'target', '_blank' )
+			.html( $.parseHTML( this.messages.articleHistory ) );
+		this.$articleLink = $( '<a>' )
+			.addClass( 'wl-footerWidget-articleLink-link' )
+			.attr( 'target', '_blank' )
+			.html( $.parseHTML( this.messages.articleLink ) );
+
+		// Initialize
+		this.$element
+			.addClass( 'wl-footerWidget' )
+			.append(
+				$( '<div>' )
+					.addClass( 'wl-footerWidget-articleHistory' )
+					.append( this.$articleHistory ),
+				$( '<div>' )
+					.addClass( 'wl-footerWidget-articleLink' )
+					.append( this.$articleLink ),
+				$( '<div>' )
+					.addClass( 'wl-footerWidget-wikimedia' )
+					.append(
+						$( '<div>' )
+							.addClass( 'wl-footerWidget-wikimedia-intro' )
+							.text( this.messages.wikimediaIntro ),
+						$( '<div>' )
+							.addClass( 'wl-footerWidget-wikimedia-participate' )
+							.append(
+								$( '<a>' )
+									.attr( 'target', '_blank' )
+									.attr( 'href', 'https://wikimediafoundation.org/participate/' )
+									.text( this.messages.wikimediaParticipate )
+							),
+						$( '<div>' )
+							.addClass( 'wl-footerWidget-wikimedia-support' )
+							.append(
+								$( '<a>' )
+									.attr( 'target', '_blank' )
+									.attr( 'href', 'https://wikimediafoundation.org/support/' )
+									.text( this.messages.wikimediaSupport )
+							)
+					)
+			);
+	};
+
+	FooterWidget.prototype.updateHistoryLink = function ( link ) {
+		this.$articleHistory.attr( 'href', link );
+	};
+
+	FooterWidget.prototype.updateArticleLink = function ( link ) {
+		this.$articleLink.attr( 'href', link );
+	};
+
+	// Export to namespace
+	$.wikilookup.FooterWidget = FooterWidget;
+}( jQuery ) );
+
+( function ( $ ) {
+	/**
 	 * Page info widget
 	 *
 	 * @class $.wikilookup.PageInfoWidget
@@ -298,6 +378,8 @@
 		this.$view = this.buildView();
 		this.$error = this.buildError();
 
+		this.footer = new $.wikilookup.FooterWidget( { messages: this.messages } );
+
 		// Initialize
 		this.setState( 'pending' );
 		this.$element
@@ -305,7 +387,8 @@
 			.append(
 				this.$pending,
 				this.$error,
-				this.$view
+				this.$view,
+				this.footer.$element
 			);
 	};
 
@@ -385,6 +468,11 @@
 		} );
 		this.$link.attr( 'href', data.url );
 		this.$element.attr( 'dir', data.dir || 'ltr' );
+
+		// Update footer links
+		this.footer.updateHistoryLink( data.history );
+		this.footer.updateArticleLink( data.url );
+
 		this.$element.toggleClass( 'wl-pageInfoWidget-wikipedia', !!data.wikipedia );
 	};
 

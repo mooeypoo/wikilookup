@@ -134,6 +134,7 @@
 				content: apiResult.extract,
 				thumbnail: apiResult.thumbnail || {},
 				url: apiResult.content_urls.desktop.page,
+				history: apiResult.content_urls.desktop.revisions,
 				dir: apiResult.dir || 'ltr',
 				wikipedia: this.isWikipedia
 			};
@@ -156,6 +157,7 @@
 			content: data.extract,
 			thumbnail: data.thumbnail,
 			url: data.canonicalurl,
+			history: data.fullurl + '?action=history',
 			dir: data.pagelanguagedir || 'ltr',
 			wikipedia: this.isWikipedia
 		};

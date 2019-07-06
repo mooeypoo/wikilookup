@@ -47,10 +47,14 @@
 
 			$( '.demoText' ).wikilookup( {
 				messages: {
-					link: 'Read more of this'
+					link: 'Read more of this',
+					articleLink: 'Go to original'
 				},
 				trigger: 'click', // Default, but make it explicit
 				sources: {
+					'default': {
+						useRestbase: true
+					},
 					spanish: {
 						// Since the default has baseURL from Wikipedia
 						// that allows for {{lang}} variable, we just need
