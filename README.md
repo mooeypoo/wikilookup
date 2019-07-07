@@ -1,2 +1,2 @@
 # jQuery.wikilookup
-A tool to display info from Wikipedia (or private wikis) on selected terms in a webpage.
+jQuery.lookup is a configurable jQuery extension that enables you to add quick information from Wikipedia and other wikis.
