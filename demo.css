@@ -1,0 +1,107 @@
+body {
+	padding: 0;
+	margin: 0;
+	font-family: 'Source Sans Pro', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+[data-wikilookup] {
+	border-bottom: 1px dashed #666;
+}
+
+.wl-header {
+	padding: 2em 0;
+	color: #fff;
+	text-align: center;
+	background-color: #6b0000;
+	background-image: linear-gradient(120deg, #6b0000, #9c005d);
+}
+
+.wl-content {
+	width: 70%;
+	margin: 0 auto;
+	margin-bottom: 3em;
+}
+
+.wl-header h1 {
+	font-size: 3em;
+	margin: 0;
+}
+
+.wl-header h2 {
+	font-weight: normal;
+}
+
+.wl-menu {
+	box-sizing: border-box;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	border-bottom: 1px solid #ccc;
+}
+
+.button {
+	padding: 1em;
+	text-decoration: none;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+.button:hover {
+	background-image: linear-gradient(0deg, #efc3d8, #ffffff);
+}
+
+.button:last-child {
+	border-left: 0;
+}
+
+/* Demo snippets */
+.demo {
+	margin: 2em 0;
+	padding: 1em;
+	border: 1px dashed #ccc;
+}
+
+.demo:before {
+	content: attr(data-demo);
+	border: 1px solid #666;
+	background: #b70808;
+	padding: 0.5em;
+	position: relative;
+	top: -2.5em;
+	color: white;
+	font-size: 0.8em;
+}
+
+.panel-1,
+.panel-2 {
+	margin-top: 1em;
+	position: relative;
+}
+
+[data-wl-source] {
+	background-color: #b9e3b9;
+}
+
+[data-wl-lang] {
+	background-color: #b9dee3;
+}
+
+.options-tbl {
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+}
+
+.options-tbl td,
+.options-tbl th {
+	font-size: 0.8em;
+	padding: 1em;
+	border: 1px solid #dddddd;
+}
+
+.options-tbl th {
+	background-color: #d5d7d8;
+}
+
+.options-tbl-option {
+	font-family: monospace;
+}

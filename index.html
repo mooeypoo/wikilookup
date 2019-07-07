@@ -3,18 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>$.wikilookup Demo</title>
-    <script src="jquery-3.4.1.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+	<script src="jquery-3.4.1.min.js"></script>
 	<script src="../dist/jquery.wikilookup-1.0.0.js"></script>
+	<link href="prism.css" rel="stylesheet" />
 	<link rel="stylesheet" href="../dist/jquery.wikilookup-1.0.0.min.css">
+	<link rel="stylesheet" href="demo.css">
 	<style>
-		[data-wikilookup] {
-			border-bottom: 1px dashed #666;
-		}
-
-		.intro {
-			padding-left: 120px;
-		}
-
 		.display {
 			background: white;
 			position: fixed;
@@ -25,48 +20,205 @@
 	</style>
 </head>
 <body>
-	<div class="wl-wikipedia-logo intro">
-		<h1>$.wikiLookup popup demo</h1>
+	<div class="wl-header">
+		<h1>jQuery Wikilookup</h1>
+		<h2>Add the power of Wikipedia to your website</h2>
+	</div>
+	<div class="wl-menu">
+		<a class="button" href="https://github.com/mooeypoo/jquery.wikilookup">View on Github</a>
+		<a class="button" href="https://github.com/mooeypoo/wikilookup-wordpress">Wordpress Plugin</a>
 	</div>
 
-	<div class=""></div>
-	<div class="demoText">
-		<p><span data-wikilookup data-wl-source="restbase">Physics</span> (from <span data-wikilookup>Ancient Greek</span>: φυσική (ἐπιστήμη),
-			romanized: physikḗ (epistḗmē), lit. 'knowledge of nature', from φύσις phýsis "nature")[1][2][3] is the <span data-wikilookup>natural science</span> that studies matter,[4] its motion and behavior through space and
-			time, and that studies the related entities of <span data-wikilookup data-wl-lang="he" data-wl-title="אנרגיה">energy</span> and force.[5] Physics is one of the most fundamental <span data-wikilookup data-wl-title="Science">scientific disciplines</span>, and its main goal is to
-			understand how the <span data-wikilookup>universe</span> behaves
-		</p>
+	<div class="wl-content">
+		<p>jQuery.wikilookup is a configurable jQuery extension that enables you to add quick information from Wikipedia and other wikis.</p>
 
-		<p><span data-wikilookup data-wl-lang="es" data-wl-title="fisica">Physics</span> is one of the oldest academic disciplines and, through its inclusion of <span data-wikilookup>astronomy</span>, perhaps the oldest.[9] Over much of the past two millennia, physics, chemistry, biology, and certain branches of mathematics, were a part of natural philosophy, but during the Scientific Revolution in the 17th century these natural sciences emerged as unique research endeavors in their own right.[b] Physics intersects with many interdisciplinary areas of research, such as biophysics and quantum chemistry, and the boundaries of physics are not rigidly defined. New ideas in physics often explain the fundamental mechanisms studied by other sciences[6] and suggest new avenues of research in academic disciplines such as mathematics and philosophy.</p>
+		<h1>Use the plugin</h1>
+		<p>To use jQuery.wikilookup, include it in your page:</p>
+		<pre><code class="language-markup">&lt;script src="../dist/jquery.wikilookup-1.0.0.js">&lt;/script>
+&lt;link rel="stylesheet" href="../dist/jquery.wikilookup-1.0.0.min.css"></code></pre>
+		<p>Call the plugin on the DOM element that holds your text.</p>
+		<pre><code class="language-js">$( '.content').wikilookup();</code></pre>
+		<p>By default, the plugin looks for elements tagged by <code class="language-html">data-wikilookup</code> property. You can change that property by providing an alternative selector:</p>
+		<pre><code class="language-js">$( '.content').wikilookup( { selector: '.someClass' } );</code></pre>
 
-		<p>Advances in <span data-wikilookup>physics</span> often enable advances in new technologies. For example, advances in the understanding of electromagnetism, solid-state physics, and nuclear physics led directly to the development of new products that have dramatically transformed modern-day society, such as television, computers, domestic appliances, and nuclear weapons;[6] advances in thermodynamics led to the development of industrialization; and advances in mechanics inspired the development of <span data-wikilookup>calculus</span> and here is a <span data-wikilookup>nonexistent</span> value from Wikipedia.</p>
+		<h1>Showing the data</h1>
+		<p>jQuery.wikilookup manages the operation of fetching the data and creating a display, but it is agnostic as to where that display is placed. Deciding where the results appear is up to you.</p>
+		<p>The view for each lookup word is stored in the <code class="language-js">data-wl-widget</code> data attribute of that node. The presentation jQuery object is stored in the <code class="language-js">$element</code> property of that object. You can call for it and display it wherever you want.</p>
+		<p>For example, to show the data in a fixed panel:</p>
+		<pre><code class="language-markup">&lt;div class="panel" style="min-height: 200px; border: 1px solid #ccc;">Information is displayed here.&lt;/div></code></pre>
+		<pre><code class="language-js">
+$( document ).ready( function () {
+	$( '.demo-1' ).wikilookup();
 
-		<p>This is a page that has a redirect: <span data-wikilookup>SFO</span>, and this is a page that <span data-wikilookup data-wl-lang="he" data-wl-title="אנרגיה">loads information</span> from right to left language.
-	</p>
+	// When clicking any of the lookup words, display the content
+	// in the panel
+	$( '.demo-1' ).find( '[data-wikilookup]' ).click( function () {
+		$( '.panel-1' ).empty()
+			.append( $( this ).data( 'wl-widget' ).$element );
+	} );
+} );
+		</code></pre>
+		<div class="demo demo-1" data-demo="Panel demo">
+			<span data-wikilookup data-wl-title="Far_Far_Away_(song)">Far far away</span>, behind the word <span data-wikilookup>mountains</span>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large <span data-wikilookup>language</span> ocean. A small river named Duden flows by their <span data-wikilookup data-wl-title="Place_(United_States_Census_Bureau)">place</span> and supplies it with the necessary regelialia. It is a paradisematic  <span data-wikilookup>country</span>, in which roasted parts of <span data-wikilookup>sentences</span> fly into your mouth. Even the all-powerful Pointing has no control about the blind <span data-wikilookup>texts</span> it is an almost unorthographic life One day however a small line of blind text by the name of <span data-wikilookup>Lorem Ipsum</span> decided to go.
+			<div class="panel-1" style="min-height: 200px; border: 1px solid #ccc;">Information is displayed here.</div>
+		</div>
+		<h1>Using sources and languages</h1>
+		<p>jQuery.wikilookup searches English Wikipedia by default, but allows you to define other sources to use in our text. The sources can be referenced from the individual terms, or override the default.</p>
+		<p>If a defined source (like English Wikipedia) is set up using <code class="language-js">{{lang}}</code> magic word in its <code class="language-js">baseURL</code> then you can also reference and change languages in individual words in your text.</p>
+		<p>For example, using the example with the panel above, we can define different sources in wikilookup initialization, and then use them in the text.</p>
+
+
+
+		<pre><code class="language-markup">&lt;div class="panel" style="min-height: 200px; border: 1px solid #ccc;">Information is displayed here.&lt;/div></code></pre>
+		<pre><code class="language-js">
+$( document ).ready( function () {
+	$( '.demo-2' ).wikilookup( {
+		sources: {
+			trek: {
+				baseURL: 'https://sto.gamepedia.com/api.php'
+			}
+		}
+	} );
+
+	// When clicking any of the lookup words, display the content
+	// in the panel
+	$( '.demo-2' ).find( '[data-wikilookup]' ).click( function () {
+		$( '.panel-2' ).empty()
+			.append( $( this ).data( 'wl-widget' ).$element );
+	} );
+} );
+		</code></pre>
+		<pre><code class="language-markup">
+&lt;span data-wikilookup data-wl-title="Far_Far_Away_(song)">Far far away&lt;/span>,
+behind the word &lt;span data-wikilookup>mountains&lt;/span>, far from the countries
+Vokalia and Consonantia, there live the blind texts. Separated they live in
+Bookmarksgrove right at the coast of the Semantics, a large
+&lt;span data-wikilookup>language&lt;/span> ocean. A small river named Duden flows by
+their &lt;span data-wikilookup data-wl-title="Place_(United_States_Census_Bureau)">place&lt;/span>
+and supplies it with the necessary regelialia. It is a paradisematic
+&lt;span data-wikilookup data-wl-lang="es" data-wl-lang="país">country&lt;/span>,
+in which roasted parts of &lt;span data-wikilookup>sentences&lt;/span> fly into
+your mouth. Even the all-powerful Pointing has no
+&lt;span data-wikilookup data-wl-source="trek" data-wl-title="Specialization:_Damage_Control_Engineer">control&lt;/span>
+about the blind &lt;span data-wikilookup>texts&lt;/span> it is an almost unorthographic
+life One day however a small line of blind text by the name of
+&lt;span data-wikilookup>Lorem Ipsum&lt;/span> decided to go.
+		</code></pre>
+		<p>In the demo below, nodes with <code class="language-js">[data-wl-source]</code class="language-js"> and <code>[data-wl-lang]</code> are marked with background colors.
+		<div class="demo demo-2" data-demo="Multiple sources demo">
+			<span data-wikilookup data-wl-title="Far_Far_Away_(song)">Far far away</span>, behind the word <span data-wikilookup>mountains</span>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large <span data-wikilookup>language</span> ocean. A small river named Duden flows by their <span data-wikilookup data-wl-title="Place_(United_States_Census_Bureau)">place</span> and supplies it with the necessary regelialia. It is a paradisematic  <span data-wikilookup data-wl-lang="es" data-wl-lang="país">country</span>, in which roasted parts of <span data-wikilookup>sentences</span> fly into your mouth. Even the all-powerful Pointing has no <span data-wikilookup data-wl-source="trek" data-wl-title="Specialization:_Damage_Control_Engineer">control</span> about the blind <span data-wikilookup>texts</span> it is an almost unorthographic life One day however a small line of blind text by the name of <span data-wikilookup>Lorem Ipsum</span> decided to go.
+			<div class="panel-2" style="min-height: 200px; border: 1px solid #ccc;">Information is displayed here.</div>
+		</div>
+
+
+
+		<h1>DOM term options</h1>
+
+
+		<h1>Configuration options</h1>
+		<p>jQuery.wikilookup allows for initialization configuration that enable you to use advanced features when defining your text lookup nodes.</p>
+
+		<table class="options-tbl">
+			<tr>
+				<th>Option</th>
+				<th>Default</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td rowspan="2" class="options-tbl-option"><code class="language-js">selector<code class="language-js"></td>
+				<td class="options-tbl-default"><code class="language-js">'[data-wikilookup]'</code></td>
+				<td class="options-tbl-example"><code class="language-js">{ selector: '.someClass' }</code></td>
+			</tr>
+			<tr>
+				<td colspan="2" class="options-tbl-desc">Set the selector for lookup words.</td>
+			</tr>
+			<tr>
+				<td rowspan="2" class="options-tbl-option"><code class="language-js">trigger<code class="language-js"></td>
+				<td class="options-tbl-default"><code class="language-js">'click'</code></td>
+				<td class="options-tbl-example"><code class="language-js">{ trigger: 'mouseenter' }</code></td>
+			</tr>
+			<tr>
+				<td colspan="2" class="options-tbl-desc">Set what triggers the data update; available options are 'click' or 'mouseenter'</td>
+			</tr>
+			<tr>
+				<td rowspan="2" class="options-tbl-option"><code class="language-js">messages<code class="language-js"></td>
+				<td colspan="2" class="options-tbl-default"><pre><code class="language-js">{
+	link: 'Read more',
+	pending: 'Loading...',
+	error: 'There was a problem loading this page information.',
+	articleHistory: 'Article history',
+	articleLink: 'Go to the original article',
+	wikimediaIntro: 'Help us improve Wikipedia',
+	wikimediaParticipate: 'Participate',
+	wikimediaSupport: 'Support'
+}</code></pre></td>
+			</tr>
+			<tr>
+				<td colspan="2" class="options-tbl-desc">Definition of the text that appears on the display.</td>
+			</tr>
+			<tr>
+				<td rowspan="2" class="options-tbl-option"><code class="language-js">prefetch<code class="language-js"></td>
+				<td class="options-tbl-default"><code class="language-js">false</code></td>
+				<td class="options-tbl-example"><code class="language-js">{ prefetch: true }</code></td>
+			</tr>
+			<tr>
+				<td colspan="2" class="options-tbl-desc">If set to true, initiates the fetching of all available lookup nodes even if they weren't directly triggered.<br/>
+					If false (by default) the nodes are fetched from the API only when they are directly triggered.<br />
+					This should only be set to true if there aren't a lot of lookup terms.</td>
+			</tr>
+			<tr>
+				<td rowspan="2" class="options-tbl-option"><code class="language-js">sources<code class="language-js"></td>
+				<td colspan="2" class="options-tbl-example"><pre><code class="language-js">{
+	sources: {
+		remote: {
+			baseURL: 'https://{{lang}}.example.com/api.php',
+			lang: 'es',
+			useRestbase: false
+		}
+	}
+}</code></pre></td>
+			</tr>
+			<tr>
+				<td colspan="2" class="options-tbl-desc">Set up sources for the nodes to lookup. By default, the lookup source is English Wikipedia. If you want to use another source, you should supply the definition through this parameter.<br />
+				You can set up named sources or override the default. Any node referencing a source will use the given source; for example <code class="language-js">&lt;span data-wikilookup data-wl-source="remote">term&lt;/span></code> will use the source named 'remote'.<br />
+				</td>
+			</tr>
+		</table>
 	</div>
-
-	<div class="display"></div>
-
+	<script src="prism.js"></script>
 	<script>
-		$( document ).ready( function () {
-			var $display = $( '.display' );
-
-			$( '.demoText' ).wikilookup( {
-				trigger: 'click', // Default, but make it explicit
-				sources: {
-					'default': {
-						useRestbase: true
-					}
-				}
-			} );
-
-			// Put the view in the display for this demo
-			$( '.demoText [data-wikilookup]' ).on( 'click', function () {
-				var widget = $( this ).data( 'wl-widget' );
-
-				$display.empty().append( widget.$element );
-			} );
+		Prism.plugins.NormalizeWhitespace.setDefaults( {
+			'break-lines': 80
 		} );
 	</script>
+	<script>
+	$( document ).ready( function () {
+		$( '.demo-1' ).wikilookup();
+
+		// When clicking any of the lookup words, display the content
+		// in the panel
+		$( '.demo-1' ).find( '[data-wikilookup]' ).click( function () {
+			$( '.panel-1' ).empty()
+				.append( $( this ).data( 'wl-widget' ).$element );
+		} );
+
+		$( '.demo-2' ).wikilookup( {
+			sources: {
+				trek: {
+					baseURL: 'https://sto.gamepedia.com/api.php'
+				}
+			}
+		} );
+
+		// When clicking any of the lookup words, display the content
+		// in the panel
+		$( '.demo-2' ).find( '[data-wikilookup]' ).click( function () {
+			$( '.panel-2' ).empty()
+				.append( $( this ).data( 'wl-widget' ).$element );
+		} );
+
+	} );
+	</script>
+
 </body>
 </html>
