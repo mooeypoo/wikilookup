@@ -1,6 +1,8 @@
 # jQuery.wikilookup
 jQuery.wikilookup is a configurable jQuery extension that enables you to add quick information from Wikipedia and other wikis.
 
+**Are you looking for the Wordpress plugin? [It's here!](https://github.com/mooeypoo/wikilookup-wordpress)**
+
 ## Use the plugin
 To use jQuery.wikilookup, include it in your page:
 ```
