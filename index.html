@@ -112,8 +112,26 @@ life One day however a small line of blind text by the name of
 
 
 
-		<h1>DOM term options</h1>
-
+		<h1>data attributes</h1>
+		<p>There are several available data attributes that control behavior per term.</p>
+		<table class="options-tbl">
+			<tr>
+				<th>attribute</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td class="options-tbl-option">data-wl-title</td>
+				<td class="options-tbl-desc">Set an alternative title</td>
+			</tr>
+			<tr>
+				<td class="options-tbl-option">data-wl-lang</td>
+				<td class="options-tbl-desc">Set a language; this only works if the source is the default (English Wikipedia) or if the given source has <code class="language-js">{{lang}}</code> parameter in its <code class="language-js">baseURL</code></td>
+			</tr>
+			<tr>
+				<td class="options-tbl-option">data-wl-source</td>
+				<td class="options-tbl-desc">Set a named source for this lookup term. If the source isn't supplied, or is not recognized, the system will use the default.</td>
+			</tr>
+		</table>
 
 		<h1>Configuration options</h1>
 		<p>jQuery.wikilookup allows for initialization configuration that enable you to use advanced features when defining your text lookup nodes.</p>

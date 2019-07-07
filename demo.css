@@ -104,4 +104,5 @@ body {
 
 .options-tbl-option {
 	font-family: monospace;
+	white-space: nowrap;
 }
