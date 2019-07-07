@@ -283,7 +283,7 @@
 
 		this.$element = config.$element || $( '<div>' );
 		this.messages = $.extend( {}, {
-			articleHistory: 'Contribution history',
+			articleHistory: 'Article history',
 			articleLink: 'Go to the original article',
 			wikimediaIntro: 'Help us improve Wikipedia',
 			wikimediaParticipate: 'Participate',
@@ -458,14 +458,17 @@
 
 		this.$title.text( data.title );
 		this.$content.text( data.content );
-		this.$thumb.css( {
-			backgroundImage: 'url( ' + data.thumbnail.source + ' )',
-			width: data.thumbnail.width,
-			height: '100%',
-			backgroundRepeat: 'no-repeat',
-			backgroundSize: 'cover',
-			backgroundPosition: 'center'
-		} );
+		if ( data.thumbnail.source ) {
+			this.$thumb.css( {
+				backgroundImage: 'url( ' + data.thumbnail.source + ' )',
+				width: data.thumbnail.width,
+				height: '100%',
+				backgroundRepeat: 'no-repeat',
+				backgroundSize: 'cover',
+				backgroundPosition: 'center'
+			} );
+		}
+		this.$thumb.toggle( !!data.thumbnail.source );
 		this.$link.attr( 'href', data.url );
 		this.$element.attr( 'dir', data.dir || 'ltr' );
 

@@ -36,7 +36,7 @@
 
 		<p>Advances in <span data-wikilookup>physics</span> often enable advances in new technologies. For example, advances in the understanding of electromagnetism, solid-state physics, and nuclear physics led directly to the development of new products that have dramatically transformed modern-day society, such as television, computers, domestic appliances, and nuclear weapons;[6] advances in thermodynamics led to the development of industrialization; and advances in mechanics inspired the development of <span data-wikilookup>calculus</span> and here is a <span data-wikilookup>nonexistent</span> value from Wikipedia.</p>
 
-		<p>This is a page that has a redirect: <span data-wikilookup>SFO</span>, and this is a page that <span data-wikilookup data-wl-lang="he" data-wl-title="אנרגיה">loads information</span> from right to left language.
+		<p>This is a page that has a redirect: <span data-wikilookup>SFO</span>, and this is a page that <span data-wikilookup data-wl-lang="he" data-wl-title="אנרגיה">loads information</span> from right to left language. This is <span data-wikilookup data-wl-source="dict" data-wl-title="dictionary">from Wiktionary</span>, as a separate source.
 	</p>
 	</div>
 
@@ -53,14 +53,9 @@
 				},
 				trigger: 'click', // Default, but make it explicit
 				sources: {
-					'default': {
-						useRestbase: true
-					},
-					spanish: {
-						// Since the default has baseURL from Wikipedia
-						// that allows for {{lang}} variable, we just need
-						// to supply a different variable
-						lang: 'es'
+					dict: {
+						baseURL: 'https://{{lang}}.wiktionary.org/w/api.php',
+						lang: 'en'
 					}
 				}
 			} );
