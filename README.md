@@ -15,6 +15,14 @@ By default, the plugin looks for elements tagged by `data-wikilookup` property.
 You can change that property by providing an alternative selector:
 ```$( '.content').wikilookup( { selector: '.someClass' } );```
 
+## Showing the data
+
+jQuery.wikilookup manages the operation of fetching the data and creating a display, but it is agnostic as to where that display is placed. Deciding where the results appear is up to you.
+
+The view for each lookup word is stored in the `data-wl-widget` data attribute of that node. The presentation jQuery object is stored in the `$element` property of that object. You can call for it and display it wherever you want.
+
+See the demos for an example.
+
 # Demo
 For information about the configuration, [visit the demo page](https://mooeypoo.github.io/jquery.wikilookup/).
 
