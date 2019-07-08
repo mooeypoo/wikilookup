@@ -92,7 +92,7 @@ module.exports = function Gruntfile( grunt ) {
 			}
 		},
 		copy: {
-			wordpress: {
+			demo: {
 				files: {}
 			}
 		}
@@ -119,11 +119,11 @@ module.exports = function Gruntfile( grunt ) {
 	config.uglify.jquery.files[ unifiedJSFileMinimized ] = unifiedJSFile;
 	config.cssmin.jquery.files[ unifiedCSSFileMinimized ] = unifiedCSSFile;
 
-	// // Copy to wordpress plugin
-	// config.copy.wordpress.files = [
-	// 	{ src: unifiedJSFileMinimized, dest: 'wordpress-plugin/assets/lib/jquery.wikilookup.min.js' },
-	// 	{ src: unifiedCSSFileMinimized, dest: 'wordpress-plugin/assets/lib/jquery.wikilookup.min.css' }
-	// ];
+	// Copy to the demo
+	config.copy.demo.files = [
+		{ src: unifiedJSFileMinimized, dest: 'demo/jquery.wikilookup.min.js' },
+		{ src: unifiedCSSFileMinimized, dest: 'demo/jquery.wikilookup.min.css' }
+	];
 
 	// Initialize config
 	grunt.initConfig( config );
@@ -136,11 +136,11 @@ module.exports = function Gruntfile( grunt ) {
 		'less:plain',
 		'concat:jquery',
 		'uglify:jquery',
-		'cssmin:jquery'
+		'cssmin:jquery',
 		// 'concat:ooui',
 		// 'uglify:ooui',
 		// 'cssmin:ooui'
-		// 'copy:wordpress',
+		'copy:demo',
 		// 'concat:wordpress'
 	] );
 	grunt.registerTask( 'default', 'build' );
