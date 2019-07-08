@@ -49,7 +49,7 @@
 	 */
 	Api.prototype.getPageInfo = function ( pageName, lang ) {
 		var self = this,
-			key = this.getCacheKey( pageName );
+			key = this.getCacheKey( pageName, lang );
 
 		if ( this.cache[ key ] ) {
 			return $.Deferred().resolve( this.cache[ key ] );
@@ -80,7 +80,7 @@
 	Api.prototype.fetch = function ( pageName, lang ) {
 		var promise,
 			self = this,
-			key = this.getCacheKey( pageName );
+			key = this.getCacheKey( pageName, lang );
 
 		promise = $.ajax( this.getApiParams( pageName, lang ) )
 			.then(
@@ -178,11 +178,13 @@
 	 * We normalize the page name so that we can make sure
 	 * we cache no matter what case or language it was given.
 	 *
-	 * @param  {string} pageName
+	 * @param {string} pageName
+	 * @param {string} [lang]
 	 * @return {string} Cache key
 	 */
-	Api.prototype.getCacheKey = function ( pageName ) {
-		return pageName
+	Api.prototype.getCacheKey = function ( pageName, lang ) {
+		lang = lang || this.lang;
+		return lang + '|' + pageName
 			.trim()
 			.toLowerCase()
 			.replace( new RegExp( /\s/g ), '_' );

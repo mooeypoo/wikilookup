@@ -111,34 +111,35 @@
 			{
 				msg: 'No change to pagename',
 				pageName: 'regular',
-				expected: 'regular'
+				expected: 'en|regular'
 			},
 			{
 				msg: 'Name with spaces',
 				pageName: 'page name',
-				expected: 'page_name'
+				expected: 'en|page_name'
 			},
 			{
 				msg: 'Name with spaces and upper case',
 				pageName: 'Page Name',
-				expected: 'page_name'
+				expected: 'en|page_name'
 			},
 			{
 				msg: 'Different language, with spaces',
 				pageName: 'ואהבת לרעך כמוך',
-				expected: 'ואהבת_לרעך_כמוך'
+				lang: 'he',
+				expected: 'he|ואהבת_לרעך_כמוך'
 			},
 			{
 				msg: 'Multiple spaces; trim',
 				pageName: '     Page     Name      ',
-				expected: 'page_____name'
+				expected: 'en|page_____name'
 			},
 		];
 
 		cases.forEach( function ( testCase ) {
 			var api = new $.wikilookup.Api();
 			assert.deepEqual(
-				api.getCacheKey( testCase.pageName ),
+				api.getCacheKey( testCase.pageName, testCase.lang ),
 				testCase.expected,
 				testCase.msg
 			);
