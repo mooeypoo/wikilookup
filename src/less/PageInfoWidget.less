@@ -1,7 +1,8 @@
 .wl-pageInfoWidget {
 	&-view-title {
 		font-size: 1.5em;
-		padding-bottom: 0.5em;
+		font-weight: bold;
+		margin-bottom: 0.5em;
 	}
 
 	&-view-link {
@@ -28,31 +29,9 @@
 				}
 
 				.wl-pageInfoWidget-wikipedia & {
-					padding-top: 25px;
-
-					.wl-pageInfoWidget-view-title {
-						margin-left: 70px;
-						margin-bottom: 20px;
-
-						[dir="rtl"]& {
-							margin-left: 0;
-							margin-right: 70px;
-						}
-					}
-
-
-					&:before {
-						display: block;
-						position: absolute;
-						z-index: -1;
-						left: 0;
-						top: 0;
-						width: 100%;
-						height: 100%;
-						opacity: 0.5;
-						content: ' ';
-						.wl-wikipedia-logo( auto, 0.5em, 0.5em );
-
+					.wl-pageInfoWidget-view-logo {
+						margin-top: 1.5em;
+						.wl-wikipedia-logo( auto 20px, 90%, 0 );
 					}
 				}
 

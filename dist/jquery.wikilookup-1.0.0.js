@@ -427,6 +427,7 @@
 	 * @return {jQuery} Info view
 	 */
 	PageInfoWidget.prototype.buildView = function () {
+		this.$logo = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-logo' );
 		this.$title = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-title' );
 		this.$content = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-content' );
 		this.$thumb = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-thumb' );
@@ -443,7 +444,12 @@
 			.append(
 				$( '<div>' )
 					.addClass( 'wl-pageInfoWidget-box' )
-					.append( this.$title, this.$content, this.$link ),
+					.append(
+						this.$title,
+						this.$content,
+						this.$link,
+						this.$logo
+					),
 				$( '<div>' )
 					.addClass( 'wl-pageInfoWidget-box' )
 					.append( this.$thumb )
