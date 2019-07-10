@@ -23,11 +23,8 @@
 .wl-pageInfoWidget-noimage .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child {
   padding: 1em;
 }
-.wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child-view-link {
-  display: inline;
-}
 .wl-pageInfoWidget-wikipedia .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child .wl-pageInfoWidget-view-logo {
-  margin-top: 1.5em;
+  margin-top: 0.5em;
   min-width: 100%;
   min-height: 25px;
   background-repeat: no-repeat;
@@ -39,11 +36,26 @@
 [dir="rtl"].wl-pageInfoWidget-wikipedia .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child .wl-pageInfoWidget-view-logo {
   background-position-x: calc(100% - 90%);
 }
-.wl-pageInfoWidget-view-content {
-  margin-bottom: 0.5em;
+.wl-pageInfoWidget .wl-pageInfoWidget-view-content {
+  position: relative;
+  overflow-y: hidden;
+  max-height: 300px;
+  min-height: 100px;
 }
-.wl-pageInfoWidget-view-content p {
+.wl-pageInfoWidget .wl-pageInfoWidget-view-content p {
   margin: 0.4em 0.5em 0 0;
+}
+.wl-pageInfoWidget .wl-pageInfoWidget-view-link {
+  font-size: 0.8em;
+}
+.wl-pageInfoWidget .wl-pageInfoWidget-view-fader {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 5em;
+  width: 100%;
+  /* "transparent" only works here because == rgba(0,0,0,0) */
+  background-image: linear-gradient(to bottom, transparent, white);
 }
 .wl-pageInfoWidget-state-pending .wl-pageInfoWidget-content-error,
 .wl-pageInfoWidget-state-pending .wl-pageInfoWidget-content-ready {
