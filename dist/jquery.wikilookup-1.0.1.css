@@ -3,9 +3,6 @@
   font-weight: bold;
   margin-bottom: 0.5em;
 }
-.wl-pageInfoWidget-view-link {
-  display: none;
-}
 .wl-pageInfoWidget-content-pending,
 .wl-pageInfoWidget-content-error {
   padding: 1em;
@@ -23,6 +20,12 @@
 [dir="rtl"] .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child {
   padding: 1em 1em 1em 0;
 }
+.wl-pageInfoWidget-noimage .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child {
+  padding: 1em;
+}
+.wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child-view-link {
+  display: inline;
+}
 .wl-pageInfoWidget-wikipedia .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child .wl-pageInfoWidget-view-logo {
   margin-top: 1.5em;
   min-width: 100%;
@@ -37,9 +40,10 @@
   background-position-x: calc(100% - 90%);
 }
 .wl-pageInfoWidget-view-content {
-  max-height: 200px;
-  overflow: auto;
   margin-bottom: 0.5em;
+}
+.wl-pageInfoWidget-view-content p {
+  margin: 0.4em 0.5em 0 0;
 }
 .wl-pageInfoWidget-state-pending .wl-pageInfoWidget-content-error,
 .wl-pageInfoWidget-state-pending .wl-pageInfoWidget-content-ready {

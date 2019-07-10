@@ -5,10 +5,6 @@
 		margin-bottom: 0.5em;
 	}
 
-	&-view-link {
-		display: none;
-	}
-
 	&-content-pending,
 	&-content-error {
 		padding: 1em;
@@ -28,6 +24,14 @@
 					padding: 1em 1em 1em 0;
 				}
 
+				.wl-pageInfoWidget-noimage & {
+					padding: 1em;
+				}
+
+				&-view-link {
+					display: inline;
+				}
+
 				.wl-pageInfoWidget-wikipedia & {
 					.wl-pageInfoWidget-view-logo {
 						margin-top: 1.5em;
@@ -41,11 +45,12 @@
 
 	// Presented text box
 	&-view-content {
-		max-height: 200px;
-		overflow: auto;
 		margin-bottom: 0.5em;
-	}
 
+		p {
+			margin: 0.4em 0.5em 0 0;
+		}
+	}
 
 	&-state {
 		&-pending {

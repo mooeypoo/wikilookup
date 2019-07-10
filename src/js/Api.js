@@ -230,7 +230,8 @@
 				piprop: 'thumbnail',
 				pithumbsize: 300,
 				redirects: '1',
-				explaintext: '1',
+				exsentences: 5,
+				// explaintext: '1',
 				exintro: '1'
 			}
 		};

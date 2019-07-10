@@ -261,7 +261,8 @@
 				piprop: 'thumbnail',
 				pithumbsize: 300,
 				redirects: '1',
-				explaintext: '1',
+				exsentences: 5,
+				// explaintext: '1',
 				exintro: '1'
 			}
 		};
@@ -465,7 +466,7 @@
 		data = $.extend( { thumbnail: {} }, data );
 
 		this.$title.text( data.title );
-		this.$content.text( data.content );
+		this.$content.append( data.content );
 		if ( data.thumbnail.source ) {
 			this.$thumb.css( {
 				backgroundImage: 'url( ' + data.thumbnail.source + ' )',
@@ -477,14 +478,16 @@
 			} );
 		}
 		this.$thumb.toggle( !!data.thumbnail.source );
-		this.$link.attr( 'href', data.url );
 		this.$element.attr( 'dir', data.dir || 'ltr' );
+		this.$link.attr( 'href', data.url );
 
 		// Update footer links
 		this.footer.updateHistoryLink( data.history );
 		this.footer.updateArticleLink( data.url );
 
-		this.$element.toggleClass( 'wl-pageInfoWidget-wikipedia', !!data.wikipedia );
+		this.$element
+			.toggleClass( 'wl-pageInfoWidget-wikipedia', !!data.wikipedia )
+			.toggleClass( 'wl-pageInfoWidget-noimage', !data.thumbnail.source );
 	};
 
 	/**
