@@ -29,7 +29,9 @@
 		this.$view = this.buildView();
 		this.$error = this.buildError();
 
-		this.footer = new $.wikilookup.FooterWidget( { messages: this.messages } );
+		this.footer = new $.wikilookup.FooterWidget( {
+			messages: this.messages
+		} );
 
 		// Initialize
 		this.setState( 'pending' );
@@ -133,6 +135,7 @@
 		// Update footer links
 		this.footer.updateHistoryLink( data.history );
 		this.footer.updateArticleLink( data.url );
+		this.footer.setWikipediaContent( !!data.wikipedia );
 
 		this.$element
 			.toggleClass( 'wl-pageInfoWidget-wikipedia', !!data.wikipedia )

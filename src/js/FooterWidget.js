@@ -14,7 +14,6 @@
 		this.messages = $.extend( {}, {
 			articleHistory: 'Article history',
 			articleLink: 'Go to the original article',
-			wikimediaIntro: 'Help us improve Wikipedia',
 			wikimediaParticipate: 'Participate',
 			wikimediaSupport: 'Support'
 		}, config.messages );
@@ -29,6 +28,10 @@
 			.html( $.parseHTML( this.messages.articleLink ) );
 
 		// Initialize
+		this.$wikimediaIntro = $( '<div>' )
+			.addClass( 'wl-footerWidget-wikimedia-intro' )
+			// This cannot be changed through configuration
+			.text( 'Help us improve MediaWiki' );
 		this.$element
 			.addClass( 'wl-footerWidget' )
 			.append(
@@ -41,9 +44,7 @@
 				$( '<div>' )
 					.addClass( 'wl-footerWidget-wikimedia' )
 					.append(
-						$( '<div>' )
-							.addClass( 'wl-footerWidget-wikimedia-intro' )
-							.text( this.messages.wikimediaIntro ),
+						this.$wikimediaIntro,
 						$( '<div>' )
 							.addClass( 'wl-footerWidget-wikimedia-participate' )
 							.append(
@@ -70,6 +71,13 @@
 
 	FooterWidget.prototype.updateArticleLink = function ( link ) {
 		this.$articleLink.attr( 'href', link );
+	};
+
+	FooterWidget.prototype.setWikipediaContent = function ( isWikipedia ) {
+		this.$wikimediaIntro.text(
+			isWikipedia ?
+			'Help us improve Wikipedia' : 'Help us improve MediaWiki'
+		);
 	};
 
 	// Export to namespace

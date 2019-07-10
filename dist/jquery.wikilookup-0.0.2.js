@@ -288,7 +288,6 @@
 		this.messages = $.extend( {}, {
 			articleHistory: 'Article history',
 			articleLink: 'Go to the original article',
-			wikimediaIntro: 'Help us improve Wikipedia',
 			wikimediaParticipate: 'Participate',
 			wikimediaSupport: 'Support'
 		}, config.messages );
@@ -303,6 +302,10 @@
 			.html( $.parseHTML( this.messages.articleLink ) );
 
 		// Initialize
+		this.$wikimediaIntro = $( '<div>' )
+			.addClass( 'wl-footerWidget-wikimedia-intro' )
+			// This cannot be changed
+			.text( 'Help us improve MediaWiki' );
 		this.$element
 			.addClass( 'wl-footerWidget' )
 			.append(
@@ -315,9 +318,7 @@
 				$( '<div>' )
 					.addClass( 'wl-footerWidget-wikimedia' )
 					.append(
-						$( '<div>' )
-							.addClass( 'wl-footerWidget-wikimedia-intro' )
-							.text( this.messages.wikimediaIntro ),
+						this.$wikimediaIntro,
 						$( '<div>' )
 							.addClass( 'wl-footerWidget-wikimedia-participate' )
 							.append(
@@ -344,6 +345,14 @@
 
 	FooterWidget.prototype.updateArticleLink = function ( link ) {
 		this.$articleLink.attr( 'href', link );
+	};
+
+	FooterWidget.prototype.setWikipediaContent = function ( isWikipedia ) {
+		if ( isWikipedia ) {
+			this.$wikimediaIntro.text( 'Help us improve Wikipedia' );
+		} else {
+			this.$wikimediaIntro.text( 'Help us improve MediaWiki' );
+		}
 	};
 
 	// Export to namespace
@@ -381,7 +390,9 @@
 		this.$view = this.buildView();
 		this.$error = this.buildError();
 
-		this.footer = new $.wikilookup.FooterWidget( { messages: this.messages } );
+		this.footer = new $.wikilookup.FooterWidget( {
+			messages: this.messages
+		} );
 
 		// Initialize
 		this.setState( 'pending' );
@@ -485,6 +496,7 @@
 		// Update footer links
 		this.footer.updateHistoryLink( data.history );
 		this.footer.updateArticleLink( data.url );
+		this.footer.setWikipediaContent( !!data.wikipedia );
 
 		this.$element
 			.toggleClass( 'wl-pageInfoWidget-wikipedia', !!data.wikipedia )
