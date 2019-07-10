@@ -28,13 +28,9 @@
 					padding: 1em;
 				}
 
-				&-view-link {
-					display: inline;
-				}
-
 				.wl-pageInfoWidget-wikipedia & {
 					.wl-pageInfoWidget-view-logo {
-						margin-top: 1.5em;
+						margin-top: 0.5em;
 						.wl-wikipedia-logo( auto 20px, 90%, 0 );
 					}
 				}
@@ -42,15 +38,33 @@
 			}
 		}
 	}
+	.wl-pageInfoWidget-view {
+		&-content {
+			position: relative;
+			overflow-y: hidden;
+			max-height: 300px;
+			min-height: 100px;
 
-	// Presented text box
-	&-view-content {
-		margin-bottom: 0.5em;
+			p {
+				margin: 0.4em 0.5em 0 0;
+			}
+		}
 
-		p {
-			margin: 0.4em 0.5em 0 0;
+		&-link {
+			font-size: 0.8em;
+		}
+
+		&-fader {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			height: 5em;
+			width: 100%;
+			/* "transparent" only works here because == rgba(0,0,0,0) */
+			background-image: linear-gradient(to bottom, transparent, white);
 		}
 	}
+
 
 	&-state {
 		&-pending {

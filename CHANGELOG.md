@@ -5,11 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- Add faded text effect to the 'read more' portion of the display.
 - Restyle content box. Display limited HTML from the API, remove height limitation, and return the 'read more' link.
 
 ## [0.0.2] - 2019-07-08
-### Added
-
 ### Changed
 - Hide thumbnail if it doesn't exist
 - Change cache key to take 'lang' into account

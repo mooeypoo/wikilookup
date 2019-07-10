@@ -432,6 +432,7 @@
 		this.$title = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-title' );
 		this.$content = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-content' );
 		this.$thumb = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-thumb' );
+		this.$fader = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-fader' );
 		this.$link = $( '<a>' )
 			.addClass( 'wl-pageInfoWidget-view-link' )
 			.attr( 'target', '_blank' )
@@ -466,7 +467,7 @@
 		data = $.extend( { thumbnail: {} }, data );
 
 		this.$title.text( data.title );
-		this.$content.append( data.content );
+		this.$content.append( data.content, this.$fader );
 		if ( data.thumbnail.source ) {
 			this.$thumb.css( {
 				backgroundImage: 'url( ' + data.thumbnail.source + ' )',
