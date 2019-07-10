@@ -10,11 +10,13 @@ To use jQuery.wikilookup, include it in your page:
 	<link rel="stylesheet" href="jquery.wikilookup-1.0.0.min.css">
 ```
 Call the plugin on the DOM element that holds your text.
+
 ```$( '.content').wikilookup();```
 
 By default, the plugin looks for elements tagged by `data-wikilookup` property.
 
 You can change that property by providing an alternative selector:
+
 ```$( '.content').wikilookup( { selector: '.someClass' } );```
 
 ## Showing the data
@@ -25,11 +27,14 @@ The view for each lookup word is stored in the `data-wl-widget` data attribute o
 
 See the demos for an example.
 
-# Demo
+## Demo
 For information about the configuration, [visit the demo page](https://mooeypoo.github.io/jquery.wikilookup/).
 
-# Contribute and help!
+## Contribute and help!
 jQuery.Wikilookup is an open source project. Please feel free to submit issues and/or pull requests.
 
-# Author
+## Changelog
+See [CHANGELOG](CHANGELOG.md)
+
+## Author
 Developed by Moriel Schottlender
