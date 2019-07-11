@@ -17,9 +17,6 @@
   position: relative;
   padding: 1em;
 }
-[dir="rtl"] .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child {
-  padding: 1em 1em 1em 0;
-}
 .wl-pageInfoWidget-noimage .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child {
   padding: 1em;
 }
@@ -53,10 +50,8 @@
   min-height: 100px;
 }
 .wl-pageInfoWidget .wl-pageInfoWidget-view-content p {
-  margin: 0.4em 0.5em 0 0;
-}
-.wl-pageInfoWidget .wl-pageInfoWidget-view-content p [dir="rtl"] {
-  margin: 0.4em 0 0 0.5em;
+  margin-top: 0.4em;
+  margin-bottom: 0;
 }
 .wl-pageInfoWidget .wl-pageInfoWidget-view-link {
   font-size: 0.8em;
