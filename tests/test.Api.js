@@ -164,7 +164,12 @@
 					url: 'https://en.wikipedia.org/wiki/Physics',
 					history: 'https://en.wikipedia.org/wiki/Physics?action=history',
 					dir: 'ltr',
-					wikipedia: true
+					wikipedia: true,
+					// TODO: test with external source
+					source: {
+						logo: '',
+						title: ''
+					}
 				},
 				restbase: {
 					title: 'Physics',
@@ -179,7 +184,12 @@
 					url: 'https://en.wikipedia.org/wiki/Physics',
 					history: 'https://en.wikipedia.org/wiki/Physics?action=history',
 					dir: 'ltr',
-					wikipedia: true
+					wikipedia: true,
+					// TODO: test with external source
+					source: {
+						logo: '',
+						title: ''
+					}
 				}
 			},
 			apiResults = {

@@ -61,6 +61,10 @@
 		this.lang = config.lang || 'en';
 		this.useRestbase = !!config.useRestbase;
 		this.baseURL = config.baseURL;
+		this.logo = $.extend( {
+			url: '',
+			title: ''
+		}, config.logo );
 
 		if ( !this.baseURL ) {
 			this.baseURL = this.useRestbase ?
@@ -167,7 +171,11 @@
 				url: apiResult.content_urls.desktop.page,
 				history: apiResult.content_urls.desktop.revisions,
 				dir: apiResult.dir || 'ltr',
-				wikipedia: this.isWikipedia
+				wikipedia: this.isWikipedia,
+				source: {
+					logo: this.logo.url,
+					title: this.logo.title
+				}
 			};
 		}
 
@@ -190,7 +198,11 @@
 			url: data.canonicalurl,
 			history: data.fullurl + '?action=history',
 			dir: data.pagelanguagedir || 'ltr',
-			wikipedia: this.isWikipedia
+			wikipedia: this.isWikipedia,
+			source: {
+				logo: this.logo.url,
+				title: this.logo.title
+			}
 		};
 	};
 
@@ -304,7 +316,7 @@
 		// Initialize
 		this.$wikimediaIntro = $( '<div>' )
 			.addClass( 'wl-footerWidget-wikimedia-intro' )
-			// This cannot be changed
+			// This cannot be changed through configuration
 			.text( 'Help us improve MediaWiki' );
 		this.$element
 			.addClass( 'wl-footerWidget' )
@@ -348,11 +360,9 @@
 	};
 
 	FooterWidget.prototype.setWikipediaContent = function ( isWikipedia ) {
-		if ( isWikipedia ) {
-			this.$wikimediaIntro.text( 'Help us improve Wikipedia' );
-		} else {
-			this.$wikimediaIntro.text( 'Help us improve MediaWiki' );
-		}
+		this.$wikimediaIntro.text(
+			isWikipedia ? 'Help us improve Wikipedia' : 'Help us improve MediaWiki'
+		);
 	};
 
 	// Export to namespace
@@ -475,7 +485,7 @@
 	 * @param  {Object} data Page data
 	 */
 	PageInfoWidget.prototype.setData = function ( data ) {
-		data = $.extend( { thumbnail: {} }, data );
+		data = $.extend( { thumbnail: {}, source: {} }, data );
 
 		this.$title.text( data.title );
 		this.$content.append( data.content, this.$fader );
@@ -500,7 +510,18 @@
 
 		this.$element
 			.toggleClass( 'wl-pageInfoWidget-wikipedia', !!data.wikipedia )
+			.toggleClass( 'wl-pageInfoWidget-externalwiki', !data.wikipedia )
+			.toggleClass( 'wl-pageInfoWidget-customlogo', data.source.logo )
 			.toggleClass( 'wl-pageInfoWidget-noimage', !data.thumbnail.source );
+
+		this.$logo.empty();
+		if ( !data.wikipedia && data.source.logo ) {
+			this.$logo.append(
+				$( '<img>' )
+					.attr( 'src', data.source.logo )
+					.attr( 'title', data.source.title )
+			);
+		}
 	};
 
 	/**

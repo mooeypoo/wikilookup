@@ -28,10 +28,25 @@
 					padding: 1em;
 				}
 
-				.wl-pageInfoWidget-wikipedia & {
-					.wl-pageInfoWidget-view-logo {
-						margin-top: 0.5em;
+				.wl-pageInfoWidget-view-logo {
+					.wl-pageInfoWidget-wikipedia & {
 						.wl-wikipedia-logo( auto 20px, 90%, 0 );
+					}
+
+					// Non-wikipedia logo
+					.wl-pageInfoWidget-externalwiki.wl-pageInfoWidget-customlogo & {
+						[dir="ltr"] & {
+							text-align: right;
+							padding-right: 1em;
+						}
+						[dir="rtl"] & {
+							text-align: left;
+							padding-left: 1em;
+						}
+
+						img {
+							max-height: 50px;
+						}
 					}
 				}
 

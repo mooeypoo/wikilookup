@@ -24,7 +24,6 @@
   padding: 1em;
 }
 .wl-pageInfoWidget-wikipedia .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child .wl-pageInfoWidget-view-logo {
-  margin-top: 0.5em;
   min-width: 100%;
   min-height: 25px;
   background-repeat: no-repeat;
@@ -35,6 +34,17 @@
 }
 [dir="rtl"].wl-pageInfoWidget-wikipedia .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child .wl-pageInfoWidget-view-logo {
   background-position-x: calc(100% - 90%);
+}
+[dir="ltr"] .wl-pageInfoWidget-externalwiki.wl-pageInfoWidget-customlogo .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child .wl-pageInfoWidget-view-logo {
+  text-align: right;
+  padding-right: 1em;
+}
+[dir="rtl"] .wl-pageInfoWidget-externalwiki.wl-pageInfoWidget-customlogo .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child .wl-pageInfoWidget-view-logo {
+  text-align: left;
+  padding-left: 1em;
+}
+.wl-pageInfoWidget-externalwiki.wl-pageInfoWidget-customlogo .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child .wl-pageInfoWidget-view-logo img {
+  max-height: 50px;
 }
 .wl-pageInfoWidget .wl-pageInfoWidget-view-content {
   position: relative;

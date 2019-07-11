@@ -30,6 +30,10 @@
 		this.lang = config.lang || 'en';
 		this.useRestbase = !!config.useRestbase;
 		this.baseURL = config.baseURL;
+		this.logo = $.extend( {
+			url: '',
+			title: ''
+		}, config.logo );
 
 		if ( !this.baseURL ) {
 			this.baseURL = this.useRestbase ?
@@ -136,7 +140,11 @@
 				url: apiResult.content_urls.desktop.page,
 				history: apiResult.content_urls.desktop.revisions,
 				dir: apiResult.dir || 'ltr',
-				wikipedia: this.isWikipedia
+				wikipedia: this.isWikipedia,
+				source: {
+					logo: this.logo.url,
+					title: this.logo.title
+				}
 			};
 		}
 
@@ -159,7 +167,11 @@
 			url: data.canonicalurl,
 			history: data.fullurl + '?action=history',
 			dir: data.pagelanguagedir || 'ltr',
-			wikipedia: this.isWikipedia
+			wikipedia: this.isWikipedia,
+			source: {
+				logo: this.logo.url,
+				title: this.logo.title
+			}
 		};
 	};
 

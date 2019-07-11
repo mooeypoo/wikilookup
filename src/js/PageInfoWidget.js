@@ -114,7 +114,7 @@
 	 * @param  {Object} data Page data
 	 */
 	PageInfoWidget.prototype.setData = function ( data ) {
-		data = $.extend( { thumbnail: {} }, data );
+		data = $.extend( { thumbnail: {}, source: {} }, data );
 
 		this.$title.text( data.title );
 		this.$content.append( data.content, this.$fader );
@@ -139,7 +139,18 @@
 
 		this.$element
 			.toggleClass( 'wl-pageInfoWidget-wikipedia', !!data.wikipedia )
+			.toggleClass( 'wl-pageInfoWidget-externalwiki', !data.wikipedia )
+			.toggleClass( 'wl-pageInfoWidget-customlogo', data.source.logo )
 			.toggleClass( 'wl-pageInfoWidget-noimage', !data.thumbnail.source );
+
+		this.$logo.empty();
+		if ( !data.wikipedia && data.source.logo ) {
+			this.$logo.append(
+				$( '<img>' )
+					.attr( 'src', data.source.logo )
+					.attr( 'title', data.source.title )
+			);
+		}
 	};
 
 	/**

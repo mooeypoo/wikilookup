@@ -75,8 +75,7 @@
 
 	FooterWidget.prototype.setWikipediaContent = function ( isWikipedia ) {
 		this.$wikimediaIntro.text(
-			isWikipedia ?
-			'Help us improve Wikipedia' : 'Help us improve MediaWiki'
+			isWikipedia ? 'Help us improve Wikipedia' : 'Help us improve MediaWiki'
 		);
 	};
 
