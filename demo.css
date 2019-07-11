@@ -88,14 +88,6 @@ body {
 	position: relative;
 }
 
-[data-wl-source] {
-	background-color: #b9e3b9;
-}
-
-[data-wl-lang] {
-	background-color: #b9dee3;
-}
-
 .options-tbl {
 	border: 1px solid #ccc;
 	border-collapse: collapse;
@@ -115,4 +107,30 @@ body {
 .options-tbl-option {
 	font-family: monospace;
 	white-space: nowrap;
+}
+
+@media ( max-width: 600px ) {
+	body {
+		margin-bottom: 20em;
+	}
+
+	.wl-menu {
+		display: block;
+	}
+
+	.wl-menu .wl-separator,
+	.wl-menu .button {
+		display: block;
+		text-align: center;
+		border: 0;
+	}
+
+	.wl-menu .button:not(:first-child) {
+		border-top: 1px solid #ccc;
+	}
+
+	/* Right before the separator */
+	.wl-menu .button:nth-child(2) {
+		border-bottom: 1px solid #ccc;
+	}
 }

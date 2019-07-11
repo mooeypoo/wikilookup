@@ -3,69 +3,84 @@
 <head>
 	<meta charset="UTF-8">
 	<title>$.wikilookup Demo</title>
-    <script src="jquery-3.4.1.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+	<script src="jquery-3.4.1.min.js"></script>
 	<script src="jquery.wikilookup.min.js"></script>
 	<link rel="stylesheet" href="jquery.wikilookup.min.css">
+	<link rel="stylesheet" href="demo.css">
 
-	<script src="popup/oojs.jquery.min.js"></script>
-	<script src="popup/ooui.widgets.min.js"></script>
+	<link href="popup/oojs-ui-wikimediaui.css" rel="stylesheet" />
+	<link href="popup/oojs-ui-widgets-wikimediaui.css" rel="stylesheet" />
+	<link href="popup/popup.mobile.corrections.css" rel="stylesheet" />
 
-	<link rel="stylesheet" href="popup/oojs-ui-wikimediaui.min.css">
-	<link rel="stylesheet" href="popup/oojs-ui-widgets-wikimediaui.min.css">
-	<link rel="stylesheet" href="popup/popup.mobile.corrections.css">
-
+	<link href="prism.css" rel="stylesheet" />
 	<style>
-		[data-wikilookup] {
-			border-bottom: 1px dashed #666;
+		ul li {
+			margin-bottom: 1em;
 		}
 	</style>
 </head>
 <body>
-	<div class="intro">
-		<h1>$.wikiLookup popup demo</h1>
+	<div class="wl-header">
+		<h1>jQuery Wikilookup</h1>
+		<h2>Add the power of Wikipedia to your website</h2>
+	</div>
+	<div class="wl-menu">
+		<a class="button" href="https://github.com/mooeypoo/jquery.wikilookup">View on Github</a>
+		<a class="button" href="https://github.com/mooeypoo/wikilookup-wordpress">Wordpress Plugin</a>
+		<div class="wl-separator"><span>Demos:</span></div>
+		<a class="button" href="index.html">Usage demo</a>
+		<a class="button" href="visual.html">Visual demo</a>
+		<a class="button active" href="popup.html">Popup demo</a>
 	</div>
 
-	<div class="demoText">
-		<p><span data-wikilookup data-wl-source="restbase">Physics</span> (from <span data-wikilookup>Ancient Greek</span>: φυσική (ἐπιστήμη),
-			romanized: physikḗ (epistḗmē), lit. 'knowledge of nature', from φύσις phýsis "nature")[1][2][3] is the <span data-wikilookup>natural science</span> that studies matter,[4] its motion and behavior through space and
-			time, and that studies the related entities of <span data-wikilookup data-wl-lang="he" data-wl-title="אנרגיה">energy</span> and force.[5] Physics is one of the most fundamental <span data-wikilookup data-wl-title="Science">scientific disciplines</span>, and its main goal is to
-			understand how the <span data-wikilookup>universe</span> behaves
-		</p>
-
-		<p><span data-wikilookup data-wl-lang="es" data-wl-title="fisica">Physics</span> is one of the oldest academic disciplines and, through its inclusion of <span data-wikilookup>astronomy</span>, perhaps the oldest.[9] Over much of the past two millennia, physics, chemistry, biology, and certain branches of mathematics, were a part of natural philosophy, but during the Scientific Revolution in the 17th century these natural sciences emerged as unique research endeavors in their own right.[b] Physics intersects with many interdisciplinary areas of research, such as biophysics and quantum chemistry, and the boundaries of physics are not rigidly defined. New ideas in physics often explain the fundamental mechanisms studied by other sciences[6] and suggest new avenues of research in academic disciplines such as mathematics and philosophy.</p>
-
-		<p>Advances in <span data-wikilookup>physics</span> often enable advances in new technologies. For example, advances in the understanding of electromagnetism, solid-state physics, and nuclear physics led directly to the development of new products that have dramatically transformed modern-day society, such as television, computers, domestic appliances, and nuclear weapons;[6] advances in thermodynamics led to the development of industrialization; and advances in mechanics inspired the development of <span data-wikilookup>calculus</span> and here is a <span data-wikilookup>nonexistent</span> value from Wikipedia.</p>
-
-		<p>This is a page that has a redirect: <span data-wikilookup>SFO</span>, and this is a page that <span data-wikilookup data-wl-lang="he" data-wl-title="אנרגיה">loads information</span> from right to left language. This is <span data-wikilookup data-wl-source="voyage" data-wl-title="Berlin">from Wikivoyage</span>, as a separate source.
-	</p>
+	<div class="wl-content">
+		<div id="lookup">
+			<p>This is a demo for the popup implementation of <code class="language-js">jQuery.wikilookup</code>. This is the implementation used for the WordPress plugin.</p>
+			<p>There are several popups you can go through to see how they render:</p>
+			<ul>
+				<li><span data-wikilookup data-demo='enwiki' data-wl-title="Mountain">Content from English Wikipedia</span></li>
+				<li><span data-wikilookup data-wl-lang="es" data-demo='eswiki' data-wl-title="Montaña">Content from Spanish Wikipedia: </span></li>
+				<li><span data-wikilookup data-wl-lang="he" data-demo='hewiki' data-wl-title="הר">Content from Hebrew Wikipedia (Right to Left)</span></li>
+				<li><span data-wikilookup data-wl-source="sto" data-demo='stowiki' data-wl-title="Mission:_Mountain_Base">Content from an external wiki (Star Trek Online wiki)</span></li>
+				<li><span data-wikilookup data-wl-source="stologo" data-demo='stowikilogo' data-wl-title="Mission:_Mountain_Base">Content from an external wiki with custom logo (Star Trek Online wiki)</span></li>
+				<li><span data-wikilookup data-demo='error' data-wl-title="There's no way this page exists|^.">Error fetching page</span></li>
+			</ul>
+		</div>
 	</div>
 
-	<div class="display"></div>
+	<script src="prism.js"></script>
+	<script>
+		Prism.plugins.NormalizeWhitespace.setDefaults( {
+			'break-lines': 80
+		} );
+	</script>
+	<script src="popup/oojs.jquery.min.js"></script>
+	<script src="popup/ooui.widgets.min.js"></script>
 
 	<script>
 		$( document ).ready( function () {
 			var $display = $( '.display' );
 
-			$( '.demoText' ).wikilookup( {
-				messages: {
-					link: 'Read more of this',
-					articleLink: 'Go to original'
-				},
-				trigger: 'click', // Default, but make it explicit
+			$( '#lookup' ).wikilookup( {
 				sources: {
-					voyage: {
-						baseURL: 'https://{{lang}}.wikivoyage.org/w/api.php',
+					sto: {
+						baseURL: 'https://sto.gamepedia.com/api.php'
+					},
+					stologo: {
+						baseURL: 'https://sto.gamepedia.com/api.php',
 						logo: {
-							url: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Wikivoyage-Logo-v3-en.svg',
-							title: 'Wikivoyage'
+							url: 'https://gamepedia.cursecdn.com/sto_gamepedia/b/bc/Wiki.png?version=dbc98082229a19dbd2e276815d4178ea',
+							title: 'Star Trek Online wiki'
 						}
 					}
 				}
 			} );
 
 			// Put the view in the display for this demo
-			$( '.demoText [data-wikilookup]' ).each( function () {
-				var widget = $( this ).data( 'wl-widget' ),
+			$( '#lookup [data-wikilookup]' ).each( function () {
+				var widget = $( this ).data( 'wl-widget' );
+
 					popup = new OO.ui.PopupWidget( {
 						width: 700,
 						$floatableContainer: $( this ),
@@ -78,5 +93,7 @@
 			} );
 		} );
 	</script>
+
+
 </body>
 </html>
