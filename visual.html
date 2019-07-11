@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<title>$.wikilookup Demo</title>
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+	<script src="jquery-3.4.1.min.js"></script>
+	<script src="jquery.wikilookup.min.js"></script>
+	<link href="prism.css" rel="stylesheet" />
+	<link rel="stylesheet" href="jquery.wikilookup.min.css">
+	<link rel="stylesheet" href="demo.css">
+	<style>
+		.display {
+			margin-top: 1em;
+			position: relative;
+			width: 700px;
+			border: 1px solid #666;
+			min-height: 50px;
+			padding: 0;
+		}
+
+		.wl-content {
+			width: 700px;
+		}
+
+		#lookup {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="wl-header">
+		<h1>jQuery Wikilookup</h1>
+		<h2>Add the power of Wikipedia to your website</h2>
+	</div>
+	<div class="wl-menu">
+		<a class="button" href="https://github.com/mooeypoo/jquery.wikilookup">View on Github</a>
+		<a class="button" href="https://github.com/mooeypoo/wikilookup-wordpress">Wordpress Plugin</a>
+		<div class="wl-separator"><span>Demos:</span></div>
+		<a class="button active" href="index.html">Usage demo</a>
+		<a class="button" href="visual.html">Visual demo</a>
+	</div>
+
+	<div class="wl-content">
+		<h2>Content from English Wikipedia</h2>
+		<div class="display" id="demo-enwiki"></div>
+
+		<h2>Content from Spanish Wikipedia</h2>
+		<div class="display" id="demo-eswiki"></div>
+
+		<h2>Content from Hebrew Wikipedia (Right to Left)</h2>
+		<div class="display" id="demo-hewiki"></div>
+
+		<h2>Content from an external wiki (Star Trek Online wiki)</h2>
+		<div class="display" id="demo-stowiki"></div>
+
+		<h2>Content from an external wiki with custom logo (Star Trek Online wiki)</h2>
+		<div class="display" id="demo-stowikilogo"></div>
+
+		<h2>Error fetching page</h2>
+		<div class="display" id="demo-error"></div>
+
+		<h2>Waiting to fetch</h2>
+		<div class="display" id="demo-pending"></div>
+	</div>
+
+	<div id="lookup">
+		<span data-wikilookup data-demo='enwiki'>Mountain</span>
+		<span data-wikilookup data-wl-lang="es" data-demo='eswiki'>Montaña</span>
+		<span data-wikilookup data-wl-lang="he" data-demo='hewiki'>הר</span>
+		<span data-wikilookup data-wl-source="sto" data-demo='stowiki'>Mission:_Mountain_Base</span>
+		<span data-wikilookup data-wl-source="stologo" data-demo='stowikilogo'>Mission:_Mountain_Base</span>
+		<span data-wikilookup data-demo='error'>There's no way this page exists|^.</span>
+	</div>
+
+	<script src="prism.js"></script>
+	<script>
+		Prism.plugins.NormalizeWhitespace.setDefaults( {
+			'break-lines': 80
+		} );
+	</script>
+	<script>
+	$( document ).ready( function () {
+		var pendingWidget = new $.wikilookup.PageInfoWidget();
+		$( '#lookup' ).wikilookup( {
+			prefetch: true,
+			sources: {
+				sto: {
+					baseURL: 'https://sto.gamepedia.com/api.php'
+				},
+				stologo: {
+					baseURL: 'https://sto.gamepedia.com/api.php',
+					logo: {
+						url: 'https://gamepedia.cursecdn.com/sto_gamepedia/b/bc/Wiki.png?version=dbc98082229a19dbd2e276815d4178ea',
+						title: 'Star Trek Online wiki'
+					}
+				}
+			}
+		} );
+
+		$( '#lookup' ).find( '[data-wikilookup] ' ).each( function () {
+			var demoID = $( this ).attr( 'data-demo' ),
+				widget = $( this ).data( 'wl-widget' );
+
+			$( '#demo-' + demoID ).append( widget.$element );
+		} );
+
+		// For the 'pending', attach a clean widget
+		$( '#demo-pending' ).append(
+			pendingWidget.$element
+		);
+	} );
+	</script>
+
+</body>
+</html>

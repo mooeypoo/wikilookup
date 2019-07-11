@@ -39,6 +39,16 @@ body {
 	border-bottom: 1px solid #ccc;
 }
 
+.wl-menu a.active {
+	font-weight: bold;
+	background-image: linear-gradient(to top, #ffffff, #dddddd);
+}
+
+.wl-separator {
+	margin: 0 0.5em 0 1em;
+	padding-top: 1em;
+}
+
 .button {
 	padding: 1em;
 	text-decoration: none;

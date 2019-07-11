@@ -27,6 +27,9 @@
 	<div class="wl-menu">
 		<a class="button" href="https://github.com/mooeypoo/jquery.wikilookup">View on Github</a>
 		<a class="button" href="https://github.com/mooeypoo/wikilookup-wordpress">Wordpress Plugin</a>
+		<div class="wl-separator"><span>Demos:</span></div>
+		<a class="button active" href="index.html">Usage demo</a>
+		<a class="button" href="visual.html">Visual demo</a>
 	</div>
 
 	<div class="wl-content">
@@ -191,7 +194,11 @@ life One day however a small line of blind text by the name of
 		remote: {
 			baseURL: 'https://{{lang}}.example.com/api.php',
 			lang: 'es',
-			useRestbase: false
+			useRestbase: false,
+			logo: {
+				url: 'http://example.com/logo.jpg', // Will be forced for max-height 50px
+				title: 'My wiki!'
+			}
 		}
 	}
 }</code></pre></td>
