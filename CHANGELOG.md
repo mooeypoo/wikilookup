@@ -5,9 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.1.0]
 ### Added
 - Allow for custom logo image and title for non-Wikipedia sources.
 - Add a visual demo to display results for various common cases.
+- Add a popup demo to demonstrate the popup implementation (that is used in the WordPress plugin)
 
 ### Changed
 - Display 'Wikipedia' and 'MediaWiki' based on the content source
