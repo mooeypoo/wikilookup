@@ -17,6 +17,9 @@
 			border: 1px solid #a2a9b1;
 			min-height: 50px;
 			padding: 0;
+			-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+			-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+			box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 		}
 
 		.wl-content {
@@ -52,6 +55,9 @@
 		<h2>Content from Hebrew Wikipedia (Right to Left)</h2>
 		<div class="display" id="demo-hewiki"></div>
 
+		<h2>Content without an image</h2>
+		<div class="display" id="demo-noimage"></div>
+
 		<h2>Content from an external wiki (Star Trek Online wiki)</h2>
 		<div class="display" id="demo-stowiki"></div>
 
@@ -69,6 +75,7 @@
 		<span data-wikilookup data-demo='enwiki'>Mountain</span>
 		<span data-wikilookup data-wl-lang="es" data-demo='eswiki'>Montaña</span>
 		<span data-wikilookup data-wl-lang="he" data-demo='hewiki'>הר</span>
+		<span data-wikilookup data-demo='noimage'>heat transfer coefficient</span>
 		<span data-wikilookup data-wl-source="sto" data-demo='stowiki'>Mission:_Mountain_Base</span>
 		<span data-wikilookup data-wl-source="stologo" data-demo='stowikilogo'>Mission:_Mountain_Base</span>
 		<span data-wikilookup data-demo='error'>There's no way this page exists|^.</span>

@@ -1,8 +1,9 @@
 .wl-pageInfoWidget {
+	position: relative;
+
 	&-view-title {
 		font-size: 1.5em;
 		font-weight: bold;
-		margin-bottom: 0.5em;
 	}
 
 	&-content-pending,
@@ -13,9 +14,11 @@
 	&-content-ready {
 		display: flex;
 
-		.wl-pageInfoWidget-box {
-			z-index: 2;
+		a {
+			text-decoration: none;
+		}
 
+		.wl-pageInfoWidget-box {
 			&:first-child {
 				position: relative;
 				padding: 1em;
@@ -25,21 +28,14 @@
 				}
 
 				.wl-pageInfoWidget-view-logo {
+					margin-bottom: 0.5em;
+
 					.wl-pageInfoWidget-wikipedia & {
-						.wl-wikipedia-logo( auto 20px, 90%, 0 );
+						.wl-wikipedia-logo( auto 20px, 0, 0 );
 					}
 
 					// Non-wikipedia logo
 					.wl-pageInfoWidget-externalwiki.wl-pageInfoWidget-customlogo & {
-						text-align: right;
-						padding-right: 1em;
-
-						[dir="rtl"] & {
-							text-align: left;
-							padding-left: 1em;
-							padding-right: 0;
-						}
-
 						img {
 							max-height: 50px;
 						}
@@ -53,7 +49,7 @@
 		&-content {
 			position: relative;
 			overflow-y: hidden;
-			max-height: 300px;
+			max-height: 200px;
 			min-height: 100px;
 
 			p {
@@ -63,7 +59,20 @@
 		}
 
 		&-link {
-			font-size: 0.8em;
+			direction: ltr;
+			display: block;
+			margin-bottom: 1em;
+			color: #3c68cc;
+			font-weight: bold;
+			.wl-icon-arrow-left( #3c68cc );
+		}
+
+		&-historyLink {
+			direction: ltr;
+			display: block;
+			color: #3c68cc;
+			font-weight: bold;
+			.wl-icon-history( #3c68cc );
 		}
 
 		&-fader {
@@ -78,11 +87,73 @@
 			background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 		}
+
+		&-thumb {
+			position: relative;
+
+			&-fader {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				height: 50px;
+				width: 100%;
+				background: rgb(0,0,0);
+				background: -moz-linear-gradient(0deg, rgba(0,0,0,0.6965161064425771) 0%, rgba(0,0,0,0) 100%);
+				background: -webkit-linear-gradient(0deg, rgba(0,0,0,0.6965161064425771) 0%, rgba(0,0,0,0) 100%);
+				background: linear-gradient(0deg, rgba(0,0,0,0.6965161064425771) 0%, rgba(0,0,0,0) 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1);
+			}
+		}
 	}
 
+	&-creditbar {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		color: #fff;
+		min-width: 200px;
+
+		[dir="rtl"] & {
+			right: auto;
+			left: 0;
+		}
+
+		.wl-pageInfoWidget-noimage & {
+			color: #3c68cc;
+		}
+
+		&-actions {
+			display: flex;
+			justify-content: flex-end;
+			padding: 0.5em;
+
+			& div:not(:first-child) {
+				margin-left: 1em;
+
+				[dir="rtl"] & {
+					margin-left: 0;
+					margin-right: 1em;
+				}
+			}
+
+			a {
+				color: white;
+				text-decoration: none;
+				font-weight: bolder;
+				border-bottom: 1px solid #fff;
+
+
+				.wl-pageInfoWidget-noimage & {
+					color: #3c68cc;
+				}
+			}
+
+		}
+	}
 
 	&-state {
 		&-pending {
+			.wl-pageInfoWidget-creditbar,
 			.wl-pageInfoWidget-content-error,
 			.wl-pageInfoWidget-content-ready {
 				display: none;
@@ -90,6 +161,7 @@
 		}
 
 		&-error {
+			.wl-pageInfoWidget-creditbar,
 			.wl-pageInfoWidget-content-pending,
 			.wl-pageInfoWidget-content-ready {
 				display: none;

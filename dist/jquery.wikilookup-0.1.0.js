@@ -286,91 +286,6 @@
 
 ( function ( $ ) {
 	/**
-	 * Footer widget
-	 *
-	 * @class $.wikilookup.FooterWidget
-	 *
-	 * @constructor
-	 * @param {Object} config Configuration options
-	 */
-	var FooterWidget = function ( config ) {
-		config = $.extend( {}, config );
-
-		this.$element = config.$element || $( '<div>' );
-		this.messages = $.extend( {}, {
-			articleHistory: 'Article history',
-			articleLink: 'Go to the original article',
-			wikimediaParticipate: 'Participate',
-			wikimediaSupport: 'Support'
-		}, config.messages );
-
-		this.$articleHistory = $( '<a>' )
-			.addClass( 'wl-footerWidget-articleHistory-link' )
-			.attr( 'target', '_blank' )
-			.html( $.parseHTML( this.messages.articleHistory ) );
-		this.$articleLink = $( '<a>' )
-			.addClass( 'wl-footerWidget-articleLink-link' )
-			.attr( 'target', '_blank' )
-			.html( $.parseHTML( this.messages.articleLink ) );
-
-		// Initialize
-		this.$wikimediaIntro = $( '<div>' )
-			.addClass( 'wl-footerWidget-wikimedia-intro' )
-			// This cannot be changed through configuration
-			.text( 'Help us improve MediaWiki' );
-		this.$element
-			.addClass( 'wl-footerWidget' )
-			.append(
-				$( '<div>' )
-					.addClass( 'wl-footerWidget-articleHistory' )
-					.append( this.$articleHistory ),
-				$( '<div>' )
-					.addClass( 'wl-footerWidget-articleLink' )
-					.append( this.$articleLink ),
-				$( '<div>' )
-					.addClass( 'wl-footerWidget-wikimedia' )
-					.append(
-						this.$wikimediaIntro,
-						$( '<div>' )
-							.addClass( 'wl-footerWidget-wikimedia-participate' )
-							.append(
-								$( '<a>' )
-									.attr( 'target', '_blank' )
-									.attr( 'href', 'https://wikimediafoundation.org/participate/' )
-									.text( this.messages.wikimediaParticipate )
-							),
-						$( '<div>' )
-							.addClass( 'wl-footerWidget-wikimedia-support' )
-							.append(
-								$( '<a>' )
-									.attr( 'target', '_blank' )
-									.attr( 'href', 'https://wikimediafoundation.org/support/' )
-									.text( this.messages.wikimediaSupport )
-							)
-					)
-			);
-	};
-
-	FooterWidget.prototype.updateHistoryLink = function ( link ) {
-		this.$articleHistory.attr( 'href', link );
-	};
-
-	FooterWidget.prototype.updateArticleLink = function ( link ) {
-		this.$articleLink.attr( 'href', link );
-	};
-
-	FooterWidget.prototype.setWikipediaContent = function ( isWikipedia ) {
-		this.$wikimediaIntro.text(
-			isWikipedia ? 'Help us improve Wikipedia' : 'Help us improve MediaWiki'
-		);
-	};
-
-	// Export to namespace
-	$.wikilookup.FooterWidget = FooterWidget;
-}( jQuery ) );
-
-( function ( $ ) {
-	/**
 	 * Page info widget
 	 *
 	 * @class $.wikilookup.PageInfoWidget
@@ -391,18 +306,17 @@
 		this.$element = config.$element || $( '<div>' );
 
 		this.messages = $.extend( {}, {
-			link: 'Read more',
+			link: 'Learn more',
 			pending: 'Loading...',
-			error: 'There was a problem loading this page information.'
+			articleHistory: 'Article history',
+			error: 'There was a problem loading this page information.',
+			wikimediaParticipate: 'Participate'
 		}, config.messages );
 
 		this.$pending = this.buildPending();
 		this.$view = this.buildView();
 		this.$error = this.buildError();
-
-		this.footer = new $.wikilookup.FooterWidget( {
-			messages: this.messages
-		} );
+		this.$creditBar = this.buildCredidBar();
 
 		// Initialize
 		this.setState( 'pending' );
@@ -412,7 +326,7 @@
 				this.$pending,
 				this.$error,
 				this.$view,
-				this.footer.$element
+				this.$creditBar
 			);
 	};
 
@@ -442,6 +356,34 @@
 		return this.state;
 	};
 
+	PageInfoWidget.prototype.buildCredidBar = function () {
+		this.$wikimediaSupport = $( '<a>' )
+			.attr( 'target', '_blank' )
+			.attr( 'href', 'https://wikimediafoundation.org/support/' )
+			.text( 'Support MediaWiki' );
+		return $( '<div>' )
+			.addClass( 'wl-pageInfoWidget-creditbar' )
+			.append(
+				$( '<div>' )
+					.addClass( 'wl-pageInfoWidget-creditbar-actions' )
+					.append(
+						// $( '<div>' )
+						// 	.addClass( 'wl-pageInfoWidget-creditbar-actions-participate' )
+						// 	.append(
+						// 		$( '<a>' )
+						// 			.attr( 'target', '_blank' )
+						// 			.attr( 'href', 'https://wikimediafoundation.org/participate/' )
+						// 			.text( this.messages.wikimediaParticipate )
+						// 	),
+						$( '<div>' )
+							.addClass( 'wl-pageInfoWidget-creditbar-actions-support' )
+							.append(
+								this.$wikimediaSupport
+							)
+					)
+			);
+	};
+
 	/**
 	 * Build the DOM elements that contain the data view
 	 *
@@ -452,13 +394,21 @@
 		this.$logo = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-logo' );
 		this.$title = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-title' );
 		this.$content = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-content' );
-		this.$thumb = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-thumb' );
+		this.$thumb = $( '<div>' )
+			.addClass( 'wl-pageInfoWidget-view-thumb' )
+			.append(
+				$( '<div>' )
+					.addClass( 'wl-pageInfoWidget-view-thumb-fader' )
+			);
 		this.$fader = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-fader' );
 		this.$link = $( '<a>' )
 			.addClass( 'wl-pageInfoWidget-view-link' )
 			.attr( 'target', '_blank' )
 			.append( this.messages.link );
-
+		this.$historyLink = $( '<a>' )
+			.addClass( 'wl-pageInfoWidget-view-historyLink' )
+			.attr( 'target', '_blank' )
+			.append( this.messages.articleHistory );
 		// Build the widget
 		// TODO: Allow giving the widget a previously built
 		// structure or template to use
@@ -468,10 +418,11 @@
 				$( '<div>' )
 					.addClass( 'wl-pageInfoWidget-box' )
 					.append(
+						this.$logo,
 						this.$title,
 						this.$content,
 						this.$link,
-						this.$logo
+						this.$historyLink
 					),
 				$( '<div>' )
 					.addClass( 'wl-pageInfoWidget-box' )
@@ -498,21 +449,22 @@
 				backgroundSize: 'cover',
 				backgroundPosition: 'center'
 			} );
+			this.$creditBar.css( { width: data.thumbnail.width } );
 		}
 		this.$thumb.toggle( !!data.thumbnail.source );
 		this.$element.attr( 'dir', data.dir || 'ltr' );
 		this.$link.attr( 'href', data.url );
-
-		// Update footer links
-		this.footer.updateHistoryLink( data.history );
-		this.footer.updateArticleLink( data.url );
-		this.footer.setWikipediaContent( !!data.wikipedia );
+		this.$historyLink.attr( 'href', data.history );
 
 		this.$element
 			.toggleClass( 'wl-pageInfoWidget-wikipedia', !!data.wikipedia )
 			.toggleClass( 'wl-pageInfoWidget-externalwiki', !data.wikipedia )
 			.toggleClass( 'wl-pageInfoWidget-customlogo', data.source.logo )
 			.toggleClass( 'wl-pageInfoWidget-noimage', !data.thumbnail.source );
+
+		this.$wikimediaSupport.text(
+			data.wikipedia ? 'Support Wikipedia' : 'Support MediaWiki'
+		);
 
 		this.$logo.empty();
 		if ( !data.wikipedia && data.source.logo ) {
