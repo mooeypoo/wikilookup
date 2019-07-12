@@ -126,13 +126,17 @@
   margin-left: 0;
   margin-right: 1em;
 }
-.wl-pageInfoWidget-creditbar-actions a {
+.wl-pageInfoWidget-creditbar-actions a,
+.wl-pageInfoWidget-creditbar-actions a:hover,
+.wl-pageInfoWidget-creditbar-actions a:visited {
   color: white;
   text-decoration: none;
   font-weight: bolder;
   border-bottom: 1px solid #fff;
 }
-.wl-pageInfoWidget-noimage .wl-pageInfoWidget-creditbar-actions a {
+.wl-pageInfoWidget-noimage .wl-pageInfoWidget-creditbar-actions a,
+.wl-pageInfoWidget-noimage .wl-pageInfoWidget-creditbar-actions a:hover,
+.wl-pageInfoWidget-noimage .wl-pageInfoWidget-creditbar-actions a:visited {
   color: #3c68cc;
 }
 .wl-pageInfoWidget-state-pending .wl-pageInfoWidget-creditbar,

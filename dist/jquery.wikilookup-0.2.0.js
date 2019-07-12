@@ -234,6 +234,24 @@
 	};
 
 	/**
+	 * Get an API url based on the base URL, pagename and language
+	 * if those are given as parameters in the base URL.
+	 *
+	 * @param {string} pageName Requested page name
+	 * @param {string} [lang] An optional language override
+	 * @return {string} URL to the API endpoint
+	 */
+	Api.prototype.getApiUrl = function ( pageName, lang ) {
+		return this.baseURL
+			.replace(
+				'{{lang}}', encodeURIComponent( lang || this.lang )
+			)
+			.replace(
+				'{{pageName}}', encodeURIComponent( pageName )
+			);
+	};
+
+	/**
 	 * Get the object definition for the ajax call,
 	 * including the full URL endpoint, data, and
 	 * ajax options.
@@ -243,15 +261,7 @@
 	 * @return {Object} Ajax definition object
 	 */
 	Api.prototype.getApiParams = function ( pageName, lang ) {
-		var apiURL = this.baseURL;
-
-		apiURL = apiURL
-			.replace(
-				'{{lang}}', encodeURIComponent( lang || this.lang )
-			)
-			.replace(
-				'{{pageName}}', encodeURIComponent( pageName )
-			);
+		var apiURL = this.getApiUrl( pageName, lang );
 
 		if ( this.useRestbase ) {
 			return {

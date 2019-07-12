@@ -1,6 +1,62 @@
 ( function () {
 	QUnit.module( '$.wikilookup.Api' );
 
+	QUnit.test( 'getApiUrl', function ( assert ) {
+		var cases = [
+			{
+				baseURL: 'https://foo.wikipedia.org/w/api.php',
+				pageName: 'Foo',
+				lang: 'en',
+				expected: 'https://foo.wikipedia.org/w/api.php',
+				msg: 'BaseURL without parameters'
+			},
+			{
+				baseURL: 'https://{{lang}}.wikipedia.org/w/api.php',
+				pageName: 'Foo',
+				lang: 'he',
+				expected: 'https://he.wikipedia.org/w/api.php',
+				msg: 'BaseURL with language parameter'
+			},
+			{
+				baseURL: 'https://{{lang}}.wikipedia.org/w/api.php',
+				pageName: 'Foo',
+				lang: null,
+				expected: 'https://en.wikipedia.org/w/api.php',
+				msg: 'BaseURL with language parameter, but fallback on default'
+			},
+			{
+				baseURL: 'https://foo.wikipedia.org/w/api.php?title={{pageName}}',
+				pageName: 'Foo',
+				lang: 'he',
+				expected: 'https://foo.wikipedia.org/w/api.php?title=Foo',
+				msg: 'BaseURL with pageName parameter'
+			},
+			{
+				baseURL: 'https://foo.wikipedia.org/w/api.php?title={{pageName}}',
+				pageName: 'Foo bar',
+				lang: 'he',
+				expected: 'https://foo.wikipedia.org/w/api.php?title=Foo%20bar',
+				msg: 'BaseURL with pageName parameter normalized for URL'
+			},
+			{
+				baseURL: 'https://{{lang}}.wikipedia.org/w/api.php?title={{pageName}}',
+				pageName: 'Foo bar',
+				lang: 'he',
+				expected: 'https://he.wikipedia.org/w/api.php?title=Foo%20bar',
+				msg: 'BaseURL with pageName and lang parameters'
+			}
+		];
+
+		cases.forEach( function ( testCase ) {
+			var api = new $.wikilookup.Api( { baseURL: testCase.baseURL } );
+			assert.deepEqual(
+				api.getApiUrl( testCase.pageName, testCase.lang ),
+				testCase.expected,
+				testCase.msg
+			);
+		} );
+	} );
+
 	QUnit.test( 'getApiParams', function ( assert ) {
 		var cases = [
 				{
