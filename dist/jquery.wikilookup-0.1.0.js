@@ -308,7 +308,7 @@
 		this.messages = $.extend( {}, {
 			link: 'Learn more',
 			pending: 'Loading...',
-			articleHistory: 'Article history',
+			articleHistory: 'Revision history',
 			error: 'There was a problem loading this page information.',
 			wikimediaParticipate: 'Participate'
 		}, config.messages );
