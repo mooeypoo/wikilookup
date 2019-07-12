@@ -7,18 +7,16 @@
 	<script src="jquery-3.4.1.min.js"></script>
 	<script src="jquery.wikilookup.min.js"></script>
 	<link rel="stylesheet" href="jquery.wikilookup.min.css">
-	<link rel="stylesheet" href="popover/bootstrap.min.css">
 	<link rel="stylesheet" href="demo.css">
+
+	<link href="popup/oojs-ui-wikimediaui.css" rel="stylesheet" />
+	<link href="popup/oojs-ui-widgets-wikimediaui.css" rel="stylesheet" />
+	<link href="popup/popup.mobile.corrections.css" rel="stylesheet" />
+
+	<link href="prism.css" rel="stylesheet" />
 	<style>
 		ul li {
 			margin-bottom: 1em;
-		}
-
-		.popover {
-			max-width: 650px;
-		}
-		.popover-body {
-			padding: 0;
 		}
 	</style>
 </head>
@@ -51,14 +49,20 @@
 		</div>
 	</div>
 
-	<script src="popover/bootstrap.bundle.min.js"></script>
+	<script src="prism.js"></script>
+	<script>
+		Prism.plugins.NormalizeWhitespace.setDefaults( {
+			'break-lines': 80
+		} );
+	</script>
+	<script src="popup/oojs.jquery.min.js"></script>
+	<script src="popup/ooui.widgets.min.js"></script>
+
 	<script>
 		$( document ).ready( function () {
-			var counter = 0
-				all = [];
+			var $display = $( '.display' );
 
 			$( '#lookup' ).wikilookup( {
-				trigger: 'mouseenter',
 				sources: {
 					sto: {
 						baseURL: 'https://sto.gamepedia.com/api.php'
@@ -73,41 +77,25 @@
 				}
 			} );
 
+			// Put the view in the display for this demo
 			$( '#lookup [data-wikilookup]' ).each( function () {
-				$( this ).popover( {
-					trigger: 'manual',
-					delay: { show: 500, hide: 500 },
-					animation: true,
-					placement: 'auto',
-					container: 'body',
-					boundary: 'window',
-					html: true,
-					content: function () {
-						var widget = $( this ).data( 'wl-widget' );
-						return widget.$element[ 0 ];
-					}
-				} )
-					.on( 'mouseenter', function () {
-						var self = this;
-						$( this ).popover( 'show' );
+				var widget = $( this ).data( 'wl-widget' );
 
-						$( '.popover' ).on( 'mouseleave', function () {
-							$( self ).popover('hide');
-						} );
-					} )
-					.on( 'mouseleave', function () {
-						var self = this;
-
-						setTimeout( function () {
-							if ( !$( '.popover:hover' ).length ) {
-								$( self ).popover( 'hide' )
-							}
-						}, 500 );
+					popup = new OO.ui.PopupWidget( {
+						width: 700,
+						$floatableContainer: $( this ),
+						$content: widget.$element,
+						autoFlip: true,
+						autoClose: true
 					} );
 
-			} );
+				$( 'body' ).append( popup.$element );
 
+				$( this ).on( 'click', popup.toggle.bind( popup ) );
+			} );
 		} );
 	</script>
+
+
 </body>
 </html>
