@@ -14,10 +14,10 @@
 			margin-bottom: 1em;
 		}
 
-		.popover {
+		.wikilookup-popover-container .popover {
 			max-width: 650px;
 		}
-		.popover-body {
+		.wikilookup-popover-container .popover-body {
 			padding: 0;
 		}
 	</style>
@@ -55,8 +55,9 @@
 	<script>
 		$( document ).ready( function () {
 			var counter = 0
-				all = [];
+				$container = $( '<div>' ).addClass( 'wikilookup-popover-container' );
 
+			$( 'body' ).append( $container );
 			$( '#lookup' ).wikilookup( {
 				trigger: 'mouseenter',
 				sources: {
@@ -79,7 +80,7 @@
 					delay: { show: 500, hide: 500 },
 					animation: true,
 					placement: 'auto',
-					container: 'body',
+					container: '.wikilookup-popover-container',
 					boundary: 'window',
 					html: true,
 					content: function () {
