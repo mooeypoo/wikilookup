@@ -15,17 +15,17 @@
 .wl-pageInfoWidget-content-ready a {
   text-decoration: none;
 }
-.wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child {
+.wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box-text {
   position: relative;
+  padding: 1em 1em 0.5em 1em;
+}
+.wl-pageInfoWidget-noimage .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box-text {
   padding: 1em;
 }
-.wl-pageInfoWidget-noimage .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child {
-  padding: 1em;
-}
-.wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child .wl-pageInfoWidget-view-logo {
+.wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box-text .wl-pageInfoWidget-view-logo {
   margin-bottom: 0.5em;
 }
-.wl-pageInfoWidget-wikipedia .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child .wl-pageInfoWidget-view-logo {
+.wl-pageInfoWidget-wikipedia .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box-text .wl-pageInfoWidget-view-logo {
   min-width: 100%;
   min-height: 25px;
   background-repeat: no-repeat;
@@ -34,10 +34,10 @@
   background-position-x: 0;
   background-position-y: 0;
 }
-[dir="rtl"].wl-pageInfoWidget-wikipedia .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child .wl-pageInfoWidget-view-logo {
+[dir="rtl"].wl-pageInfoWidget-wikipedia .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box-text .wl-pageInfoWidget-view-logo {
   background-position-x: calc(100% - 0);
 }
-.wl-pageInfoWidget-externalwiki.wl-pageInfoWidget-customlogo .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box:first-child .wl-pageInfoWidget-view-logo img {
+.wl-pageInfoWidget-externalwiki.wl-pageInfoWidget-customlogo .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box-text .wl-pageInfoWidget-view-logo img {
   max-height: 50px;
 }
 .wl-pageInfoWidget .wl-pageInfoWidget-view-content {
@@ -53,7 +53,7 @@
 .wl-pageInfoWidget .wl-pageInfoWidget-view-link {
   direction: ltr;
   display: block;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   color: #3c68cc;
   font-weight: bold;
   background-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M8.59 3.42L14.17 9H2v2h12.17l-5.58 5.59L10 18l8-8-8-8z" fill="#3c68cc"/></svg>');
@@ -63,11 +63,22 @@
 .wl-pageInfoWidget .wl-pageInfoWidget-view-historyLink {
   direction: ltr;
   display: block;
+  margin-bottom: 0.5em;
   color: #3c68cc;
   font-weight: bold;
   background-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M9 6v5h.06l2.48 2.47 1.41-1.41L11 10.11V6z" fill="#3c68cc"/><path d="M10 1a9 9 0 0 0-7.85 13.35L.5 16H6v-5.5l-2.38 2.38A7 7 0 1 1 10 17v2a9 9 0 0 0 0-18z" fill="#3c68cc"/></svg>');
   background-repeat: no-repeat;
   padding-left: calc(20px + 0.5em);
+}
+.wl-pageInfoWidget .wl-pageInfoWidget-view-copyrightLink {
+  direction: ltr;
+  display: block;
+  font-size: 0.8em;
+}
+.wl-pageInfoWidget .wl-pageInfoWidget-view-copyrightLink,
+.wl-pageInfoWidget .wl-pageInfoWidget-view-copyrightLink:hover,
+.wl-pageInfoWidget .wl-pageInfoWidget-view-copyrightLink:visited {
+  color: #666;
 }
 .wl-pageInfoWidget .wl-pageInfoWidget-view-fader {
   position: absolute;

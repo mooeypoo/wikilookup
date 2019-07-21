@@ -19,9 +19,9 @@
 		}
 
 		.wl-pageInfoWidget-box {
-			&:first-child {
+			&-text {
 				position: relative;
-				padding: 1em;
+				padding: 1em 1em 0.5em 1em;
 
 				.wl-pageInfoWidget-noimage & {
 					padding: 1em;
@@ -45,6 +45,7 @@
 			}
 		}
 	}
+
 	.wl-pageInfoWidget-view {
 		&-content {
 			position: relative;
@@ -61,7 +62,7 @@
 		&-link {
 			direction: ltr;
 			display: block;
-			margin-bottom: 1em;
+			margin-bottom: 0.5em;
 			color: #3c68cc;
 			font-weight: bold;
 			.wl-icon-arrow-left( #3c68cc );
@@ -70,9 +71,22 @@
 		&-historyLink {
 			direction: ltr;
 			display: block;
+			margin-bottom: 0.5em;
 			color: #3c68cc;
 			font-weight: bold;
 			.wl-icon-history( #3c68cc );
+		}
+
+		&-copyrightLink {
+			direction: ltr;
+			display: block;
+			font-size: 0.8em;
+
+			&,
+			&:hover,
+			&:visited {
+				color: #666;
+			}
 		}
 
 		&-fader {

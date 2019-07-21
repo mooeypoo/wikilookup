@@ -402,6 +402,9 @@
 	 */
 	PageInfoWidget.prototype.buildView = function () {
 		this.$logo = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-logo' );
+		this.$copyright = $( '<a>' )
+			.addClass( 'wl-pageInfoWidget-view-copyrightLink' )
+			.text( 'See article for copyright information' );
 		this.$title = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-title' );
 		this.$content = $( '<div>' ).addClass( 'wl-pageInfoWidget-view-content' );
 		this.$thumb = $( '<div>' )
@@ -426,16 +429,20 @@
 			.addClass( 'wl-pageInfoWidget-content-ready' )
 			.append(
 				$( '<div>' )
-					.addClass( 'wl-pageInfoWidget-box' )
+					.addClass( 'wl-pageInfoWidget-box wl-pageInfoWidget-box-text' )
 					.append(
+						// $( '<div>' )
+						// 	.addClass( 'wl-pageInfoWidget-view-copyright' )
+						// 	.append( this.$copyright ),
 						this.$logo,
 						this.$title,
 						this.$content,
 						this.$link,
-						this.$historyLink
+						this.$historyLink,
+						this.$copyright
 					),
 				$( '<div>' )
-					.addClass( 'wl-pageInfoWidget-box' )
+					.addClass( 'wl-pageInfoWidget-box wl-pageInfoWidget-box-image' )
 					.append( this.$thumb )
 			);
 	};
@@ -464,6 +471,7 @@
 		this.$thumb.toggle( !!data.thumbnail.source );
 		this.$element.attr( 'dir', data.dir || 'ltr' );
 		this.$link.attr( 'href', data.url );
+		this.$copyright.attr( 'href', data.url );
 		this.$historyLink.attr( 'href', data.history );
 
 		this.$element
