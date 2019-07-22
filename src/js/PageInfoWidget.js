@@ -19,6 +19,7 @@
 
 		this.$element = config.$element || $( '<div>' );
 
+		this.hideThumb = !!config.hideThumb;
 		this.messages = $.extend( {}, {
 			link: 'Learn more',
 			pending: 'Loading...',
@@ -81,14 +82,6 @@
 				$( '<div>' )
 					.addClass( 'wl-pageInfoWidget-creditbar-actions' )
 					.append(
-						// $( '<div>' )
-						// 	.addClass( 'wl-pageInfoWidget-creditbar-actions-participate' )
-						// 	.append(
-						// 		$( '<a>' )
-						// 			.attr( 'target', '_blank' )
-						// 			.attr( 'href', 'https://wikimediafoundation.org/participate/' )
-						// 			.text( this.messages.wikimediaParticipate )
-						// 	),
 						$( '<div>' )
 							.addClass( 'wl-pageInfoWidget-creditbar-actions-support' )
 							.append(
@@ -172,7 +165,7 @@
 			} );
 			this.$creditBar.css( { width: data.thumbnail.width } );
 		}
-		this.$thumb.toggle( !!data.thumbnail.source );
+		this.$thumb.toggle( !!data.thumbnail.source && !this.hideThumb );
 		this.$element.attr( 'dir', data.dir || 'ltr' );
 		this.$link.attr( 'href', data.url );
 		this.$copyright.attr( 'href', data.url );

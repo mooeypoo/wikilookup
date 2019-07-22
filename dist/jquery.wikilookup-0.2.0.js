@@ -315,6 +315,7 @@
 
 		this.$element = config.$element || $( '<div>' );
 
+		this.hideThumb = !!config.hideThumb;
 		this.messages = $.extend( {}, {
 			link: 'Learn more',
 			pending: 'Loading...',
@@ -377,14 +378,6 @@
 				$( '<div>' )
 					.addClass( 'wl-pageInfoWidget-creditbar-actions' )
 					.append(
-						// $( '<div>' )
-						// 	.addClass( 'wl-pageInfoWidget-creditbar-actions-participate' )
-						// 	.append(
-						// 		$( '<a>' )
-						// 			.attr( 'target', '_blank' )
-						// 			.attr( 'href', 'https://wikimediafoundation.org/participate/' )
-						// 			.text( this.messages.wikimediaParticipate )
-						// 	),
 						$( '<div>' )
 							.addClass( 'wl-pageInfoWidget-creditbar-actions-support' )
 							.append(
@@ -419,7 +412,7 @@
 			.attr( 'target', '_blank' )
 			.append( this.messages.link );
 		this.$historyLink = $( '<a>' )
-			.addClass( 'wl-pageInfoWidget-view-historyLink' )
+			.addClass( 'wl-pageInfoWidget-view-articleHistory' )
 			.attr( 'target', '_blank' )
 			.append( this.messages.articleHistory );
 		// Build the widget
@@ -468,7 +461,7 @@
 			} );
 			this.$creditBar.css( { width: data.thumbnail.width } );
 		}
-		this.$thumb.toggle( !!data.thumbnail.source );
+		this.$thumb.toggle( !!data.thumbnail.source && !this.hideThumb );
 		this.$element.attr( 'dir', data.dir || 'ltr' );
 		this.$link.attr( 'href', data.url );
 		this.$copyright.attr( 'href', data.url );
@@ -552,6 +545,7 @@
 	 *  At least one of the key definitions (baseURL and/or lang)
 	 *  should be defined; these will be used for the node that uses the
 	 *  sourceName as its `data-wl-source` attribute value.
+	 * @param {boolean} [hideThumb] Never show the image thumbnails
 	 * @param {Object} [messages] An object representing the message text
 	 *  for display for the various widget states.
 	 *  - messages.pending: Text or jQuery node that appears when the widget
@@ -572,6 +566,7 @@
 		this.prefetch = !!config.prefetch;
 		this.selector = config.selector || '[data-wikilookup]';
 		this.messages = config.messages || {};
+		this.hideThumb = !!config.hideThumb;
 
 		this.$nodes = $();
 		this.sources = {};
@@ -619,7 +614,8 @@
 
 			// Create a view object and store it in a reference
 			widget = new $.wikilookup.PageInfoWidget( {
-				messages: self.messages
+				messages: self.messages,
+				hideThumb: self.hideThumb
 			} );
 
 			$( this ).data( 'wl-widget', widget );

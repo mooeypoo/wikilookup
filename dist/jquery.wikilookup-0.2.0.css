@@ -60,7 +60,7 @@
   background-repeat: no-repeat;
   padding-left: calc(20px + 0.5em);
 }
-.wl-pageInfoWidget .wl-pageInfoWidget-view-historyLink {
+.wl-pageInfoWidget .wl-pageInfoWidget-view-articleHistory {
   direction: ltr;
   display: block;
   margin-bottom: 0.5em;

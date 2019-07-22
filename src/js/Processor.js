@@ -24,6 +24,7 @@
 	 *  At least one of the key definitions (baseURL and/or lang)
 	 *  should be defined; these will be used for the node that uses the
 	 *  sourceName as its `data-wl-source` attribute value.
+	 * @param {boolean} [hideThumb] Never show the image thumbnails
 	 * @param {Object} [messages] An object representing the message text
 	 *  for display for the various widget states.
 	 *  - messages.pending: Text or jQuery node that appears when the widget
@@ -44,6 +45,7 @@
 		this.prefetch = !!config.prefetch;
 		this.selector = config.selector || '[data-wikilookup]';
 		this.messages = config.messages || {};
+		this.hideThumb = !!config.hideThumb;
 
 		this.$nodes = $();
 		this.sources = {};
@@ -91,7 +93,8 @@
 
 			// Create a view object and store it in a reference
 			widget = new $.wikilookup.PageInfoWidget( {
-				messages: self.messages
+				messages: self.messages,
+				hideThumb: self.hideThumb
 			} );
 
 			$( this ).data( 'wl-widget', widget );
