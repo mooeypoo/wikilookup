@@ -1,5 +1,7 @@
 .wl-pageInfoWidget {
 	position: relative;
+	background-color: white;
+	color: #000;
 
 	&-view-title {
 		font-size: 1.5em;
@@ -15,7 +17,8 @@
 		display: flex;
 
 		a {
-			text-decoration: none;
+			// Override all other definitions
+			text-decoration: none !important;
 		}
 
 		.wl-pageInfoWidget-box {

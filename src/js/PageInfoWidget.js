@@ -174,7 +174,7 @@
 		this.$element
 			.toggleClass( 'wl-pageInfoWidget-wikipedia', !!data.wikipedia )
 			.toggleClass( 'wl-pageInfoWidget-externalwiki', !data.wikipedia )
-			.toggleClass( 'wl-pageInfoWidget-customlogo', data.source.logo )
+			.toggleClass( 'wl-pageInfoWidget-customlogo', !data.wikipedia && !!data.source.logo )
 			.toggleClass( 'wl-pageInfoWidget-noimage', !data.thumbnail.source );
 
 		this.$wikimediaSupport.text(

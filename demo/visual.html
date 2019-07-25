@@ -26,6 +26,40 @@
 			width: 700px;
 		}
 
+		.wl-lightdark {
+			display: flex;
+			margin: 1em auto;
+			width: 100px;
+			justify-content: space-between;
+		}
+
+		.wl-lightdark a,
+		.wl-lightdark a:hover {
+			text-decoration: none;
+			padding: 0.5em;
+		}
+
+		.wl-lightdark a.active {
+			font-weight: bold;
+			background-color: #eee;
+		}
+
+		.wl-wrapper {
+			width: 100%;
+			margin: 0;
+			padding: 1em 0;
+		}
+
+		.wl-wrapper.wl-bg-light {
+			background: #fff;
+			color: #666;
+		}
+
+		.wl-wrapper.wl-bg-dark {
+			background: #000;
+			color: #fff;
+		}
+
 		#lookup {
 			display: none;
 		}
@@ -45,40 +79,50 @@
 		<a class="button" href="popup.html">Popup demo</a>
 	</div>
 
-	<div class="wl-content">
-		<h2>Content from English Wikipedia</h2>
-		<div class="display" id="demo-enwiki"></div>
-
-		<h2>Content from Spanish Wikipedia</h2>
-		<div class="display" id="demo-eswiki"></div>
-
-		<h2>Content from Hebrew Wikipedia (Right to Left)</h2>
-		<div class="display" id="demo-hewiki"></div>
-
-		<h2>Content without an image</h2>
-		<div class="display" id="demo-noimage"></div>
-
-		<h2>Content from an external wiki (Star Trek Online wiki)</h2>
-		<div class="display" id="demo-stowiki"></div>
-
-		<h2>Content from an external wiki with custom logo (Star Trek Online wiki)</h2>
-		<div class="display" id="demo-stowikilogo"></div>
-
-		<h2>Error fetching page</h2>
-		<div class="display" id="demo-error"></div>
-
-		<h2>Waiting to fetch</h2>
-		<div class="display" id="demo-pending"></div>
+	<div class="wl-lightdark">
+		<div><a href="#" data-bg="light" class="active">Light</a></div>
+		<div><a href="#" data-bg="dark">Dark</a></div>
 	</div>
 
-	<div id="lookup">
-		<span data-wikilookup data-demo='enwiki'>Mountain</span>
-		<span data-wikilookup data-wl-lang="es" data-demo='eswiki'>Montaña</span>
-		<span data-wikilookup data-wl-lang="he" data-demo='hewiki'>הר</span>
-		<span data-wikilookup data-demo='noimage'>heat transfer coefficient</span>
-		<span data-wikilookup data-wl-source="sto" data-demo='stowiki'>Mission:_Mountain_Base</span>
-		<span data-wikilookup data-wl-source="stologo" data-demo='stowikilogo'>Mission:_Mountain_Base</span>
-		<span data-wikilookup data-demo='error'>There's no way this page exists|^.</span>
+	<div class="wl-wrapper wl-bg-light">
+		<div class="wl-content">
+			<h2>Content without API</h2>
+			<div class="display" id="demo-data"></div>
+
+			<h2>Content from English Wikipedia</h2>
+			<div class="display" id="demo-enwiki"></div>
+
+			<h2>Content from Spanish Wikipedia</h2>
+			<div class="display" id="demo-eswiki"></div>
+
+			<h2>Content from Hebrew Wikipedia (Right to Left)</h2>
+			<div class="display" id="demo-hewiki"></div>
+
+			<h2>Content without an image</h2>
+			<div class="display" id="demo-noimage"></div>
+
+			<h2>Content from an external wiki (Star Trek Online wiki)</h2>
+			<div class="display" id="demo-stowiki"></div>
+
+			<h2>Content from an external wiki with custom logo (Star Trek Online wiki)</h2>
+			<div class="display" id="demo-stowikilogo"></div>
+
+			<h2>Error fetching page</h2>
+			<div class="display" id="demo-error"></div>
+
+			<h2>Waiting to fetch</h2>
+			<div class="display" id="demo-pending"></div>
+		</div>
+
+		<div id="lookup">
+			<span data-wikilookup data-demo='enwiki'>Mountain</span>
+			<span data-wikilookup data-wl-lang="es" data-demo='eswiki'>Montaña</span>
+			<span data-wikilookup data-wl-lang="he" data-demo='hewiki'>הר</span>
+			<span data-wikilookup data-demo='noimage'>heat transfer coefficient</span>
+			<span data-wikilookup data-wl-source="sto" data-demo='stowiki'>Mission:_Mountain_Base</span>
+			<span data-wikilookup data-wl-source="stologo" data-demo='stowikilogo'>Mission:_Mountain_Base</span>
+			<span data-wikilookup data-demo='error'>There's no way this page exists|^.</span>
+		</div>
 	</div>
 
 	<script src="prism.js"></script>
@@ -89,7 +133,27 @@
 	</script>
 	<script>
 	$( document ).ready( function () {
-		var pendingWidget = new $.wikilookup.PageInfoWidget();
+		var pendingWidget = new $.wikilookup.PageInfoWidget(),
+			dataWidget = new $.wikilookup.PageInfoWidget(),
+			data = {
+				title: 'Physics',
+				content: 'Physics (from Ancient Greek: \u03c6\u03c5\u03c3\u03b9\u03ba\u03ae (\u1f10\u03c0\u03b9\u03c3\u03c4\u03ae\u03bc\u03b7), romanized: physik\u1e17 (epist\u1e17m\u0113), lit. \'knowledge of nature\', from \u03c6\u03cd\u03c3\u03b9\u03c2 ph\u00fdsis \"nature\") is the natural science that studies matter, its motion and behavior through space and time, and that studies the related entities of energy and force. Physics is one of the most fundamental scientific disciplines, and its main goal is to understand how the universe behaves.Physics is one of the oldest academic disciplines and, through its inclusion of astronomy, perhaps the oldest. Over much of the past two millennia, physics, chemistry, biology, and certain branches of mathematics, were a part of natural philosophy, but during the Scientific Revolution in the 17th century these natural sciences emerged as unique research endeavors in their own right. Physics intersects with many interdisciplinary areas of research, such as biophysics and quantum chemistry, and the boundaries of physics are not rigidly defined. New ideas in physics often explain the fundamental mechanisms studied by other sciences and suggest new avenues of research in academic disciplines such as mathematics and philosophy.\nAdvances in physics often enable advances in new technologies. For example, advances in the understanding of electromagnetism, solid-state physics, and nuclear physics led directly to the development of new products that have dramatically transformed modern-day society, such as television, computers, domestic appliances, and nuclear weapons; advances in thermodynamics led to the development of industrialization; and advances in mechanics inspired the development of calculus.',
+				thumbnail: {
+					source: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/CollageFisica.jpg/300px-CollageFisica.jpg',
+					width: 300,
+					height:217
+				},
+				url: 'https://en.wikipedia.org/wiki/Physics',
+				history: 'https://en.wikipedia.org/wiki/Physics?action=history',
+				dir: 'ltr',
+				wikipedia: true,
+				// TODO: test with external source
+				source: {
+					logo: '',
+					title: ''
+				}
+			};
+
 		$( '#lookup' ).wikilookup( {
 			prefetch: true,
 			sources: {
@@ -113,10 +177,25 @@
 			$( '#demo-' + demoID ).append( widget.$element );
 		} );
 
+		$( '#demo-data' ).append( dataWidget.$element );
+		dataWidget.setData( data );
+		dataWidget.setState( 'ready' );
+
 		// For the 'pending', attach a clean widget
 		$( '#demo-pending' ).append(
 			pendingWidget.$element
 		);
+
+		$( '.wl-lightdark a' ).click( function () {
+			var show = $( this ).attr( 'data-bg' );
+			$( '.wl-wrapper' )
+				.toggleClass( 'wl-bg-light', show === 'light' )
+				.toggleClass( 'wl-bg-dark', show === 'dark' );
+
+			$( this ).closest( '.wl-lightdark' ).find( 'a' ).each( function () {
+				$( this ).toggleClass( 'active', $( this ).attr( 'data-bg' ) === show );
+			} );
+		} );
 	} );
 	</script>
 

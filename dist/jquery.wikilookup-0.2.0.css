@@ -1,5 +1,7 @@
 .wl-pageInfoWidget {
   position: relative;
+  background-color: white;
+  color: #000;
 }
 .wl-pageInfoWidget-view-title {
   font-size: 1.5em;
@@ -13,7 +15,7 @@
   display: flex;
 }
 .wl-pageInfoWidget-content-ready a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 .wl-pageInfoWidget-content-ready .wl-pageInfoWidget-box-text {
   position: relative;

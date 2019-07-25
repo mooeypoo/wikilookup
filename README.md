@@ -37,4 +37,5 @@ jQuery.Wikilookup is an open source project. Please feel free to submit issues a
 See [CHANGELOG](CHANGELOG.md)
 
 ## Author
-Developed by Moriel Schottlender
+- Developed by Moriel Schottlender
+- Design guidance by Nirzar Pangarkar
