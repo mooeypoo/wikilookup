@@ -135,7 +135,7 @@
 	$( document ).ready( function () {
 		var pendingWidget = new $.wikilookup.PageInfoWidget(),
 			dataWidget = new $.wikilookup.PageInfoWidget(),
-			data = {
+			offlineData = {
 				title: 'Physics',
 				content: 'Physics (from Ancient Greek: \u03c6\u03c5\u03c3\u03b9\u03ba\u03ae (\u1f10\u03c0\u03b9\u03c3\u03c4\u03ae\u03bc\u03b7), romanized: physik\u1e17 (epist\u1e17m\u0113), lit. \'knowledge of nature\', from \u03c6\u03cd\u03c3\u03b9\u03c2 ph\u00fdsis \"nature\") is the natural science that studies matter, its motion and behavior through space and time, and that studies the related entities of energy and force. Physics is one of the most fundamental scientific disciplines, and its main goal is to understand how the universe behaves.Physics is one of the oldest academic disciplines and, through its inclusion of astronomy, perhaps the oldest. Over much of the past two millennia, physics, chemistry, biology, and certain branches of mathematics, were a part of natural philosophy, but during the Scientific Revolution in the 17th century these natural sciences emerged as unique research endeavors in their own right. Physics intersects with many interdisciplinary areas of research, such as biophysics and quantum chemistry, and the boundaries of physics are not rigidly defined. New ideas in physics often explain the fundamental mechanisms studied by other sciences and suggest new avenues of research in academic disciplines such as mathematics and philosophy.\nAdvances in physics often enable advances in new technologies. For example, advances in the understanding of electromagnetism, solid-state physics, and nuclear physics led directly to the development of new products that have dramatically transformed modern-day society, such as television, computers, domestic appliances, and nuclear weapons; advances in thermodynamics led to the development of industrialization; and advances in mechanics inspired the development of calculus.',
 				thumbnail: {
@@ -178,7 +178,7 @@
 		} );
 
 		$( '#demo-data' ).append( dataWidget.$element );
-		dataWidget.setData( data );
+		dataWidget.setData( offlineData );
 		dataWidget.setState( 'ready' );
 
 		// For the 'pending', attach a clean widget
@@ -196,7 +196,12 @@
 				$( this ).toggleClass( 'active', $( this ).attr( 'data-bg' ) === show );
 			} );
 
-			$( '.wl-pageInfoWidget' ).toggleClass( 'wl-dark', show === 'dark' )
+			$( '#lookup' ).find( '[data-wikilookup] ' ).each( function () {
+				var widget = $( this ).data( 'wl-widget' );
+				widget.toggleDarkMode( show === 'dark' );
+			} );
+
+			dataWidget.toggleDarkMode( show === 'dark' );
 		} );
 	} );
 	</script>
