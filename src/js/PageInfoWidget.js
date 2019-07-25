@@ -13,6 +13,7 @@
 	 *    is in an error mode.
 	 *  - messages.link: The text that appears for the 'read more' link that
 	 *    links back to the page's origins
+	 * @param {boolean} [dark] Toggle presentation in dark mode
 	 */
 	var PageInfoWidget = function ( config ) {
 		config = config || {};
@@ -32,9 +33,11 @@
 		this.$view = this.buildView();
 		this.$error = this.buildError();
 		this.$creditBar = this.buildCredidBar();
+		this.dark = false;
 
 		// Initialize
 		this.setState( 'pending' );
+		this.toggleDarkMode( !!config.dark );
 		this.$element
 			.addClass( 'wl-pageInfoWidget' )
 			.append(
@@ -43,6 +46,17 @@
 				this.$view,
 				this.$creditBar
 			);
+	};
+
+	/**
+	 * Toggle the widget to present in dark or light mode
+	 *
+	 * @param  {boolean} isDark Dark mode enabled
+	 */
+	PageInfoWidget.prototype.toggleDarkMode = function ( isDark ) {
+		this.dark = isDark === undefined ? !this.dark : !!isDark;
+		this.$element.toggleClass( 'wl-dark', this.dark );
+
 	};
 
 	/**

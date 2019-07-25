@@ -33,6 +33,7 @@
 	 *    is in an error mode.
 	 *  - messages.link: The text that appears for the 'read more' link that
 	 *    links back to the page's origins
+	 * @param {boolean} [dark] Set the widget to dark mode
 	 */
 	var Processor = function ( $container, config ) {
 		config = config || {};
@@ -46,6 +47,7 @@
 		this.selector = config.selector || '[data-wikilookup]';
 		this.messages = config.messages || {};
 		this.hideThumb = !!config.hideThumb;
+		this.dark = !!config.dark;
 
 		this.$nodes = $();
 		this.sources = {};
@@ -94,7 +96,8 @@
 			// Create a view object and store it in a reference
 			widget = new $.wikilookup.PageInfoWidget( {
 				messages: self.messages,
-				hideThumb: self.hideThumb
+				hideThumb: self.hideThumb,
+				dark: self.dark
 			} );
 
 			$( this ).data( 'wl-widget', widget );
