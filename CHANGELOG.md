@@ -5,9 +5,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.2.1]
+### Added
+- Dark mode for the widget. Possible to either initialize with dark mode or toggle. Add `.wl-dark` to the `.wl-pageInfoWidget` to toggle manually.
+- Add ability to hide thumbs (hideThumb option)
+- Add copyright notice
+### Fixed
+- Removed wrongfully attached -customlogo class when logo is Wikipedia
+### Changed
+- DEMOS: Wrap popovers with scoped div
+
 ## [0.2.0]
 ### Added
 - Popup demo using bootstrap popover.
+
 ### Changed
 - Completely change the popup design.
 
@@ -32,8 +44,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.1] - 2019-07-07
 Working version.
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.0.2...v0.1.0
-[0.0.2]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.0.1...v0.0.2
-[0.0.1]: https://github.com/olivierlacan/keep-a-changelog/releases/tag/v0.0.1
+[Unreleased]: https://github.com/mooeypoo/jquery.wikilookup/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/mooeypoo/jquery.wikilookup/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/mooeypoo/jquery.wikilookup/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/mooeypoo/jquery.wikilookup/compare/v0.0.2...v0.1.0
+[0.0.2]: https://github.com/mooeypoo/jquery.wikilookup/compare/v0.0.1...v0.0.2
+[0.0.1]: https://github.com/mooeypoo/jquery.wikilookup/releases/tag/v0.0.1
