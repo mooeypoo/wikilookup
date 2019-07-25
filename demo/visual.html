@@ -195,6 +195,8 @@
 			$( this ).closest( '.wl-lightdark' ).find( 'a' ).each( function () {
 				$( this ).toggleClass( 'active', $( this ).attr( 'data-bg' ) === show );
 			} );
+
+			$( '.wl-pageInfoWidget' ).toggleClass( 'wl-dark', show === 'dark' )
 		} );
 	} );
 	</script>
