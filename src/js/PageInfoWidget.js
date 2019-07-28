@@ -170,7 +170,7 @@
 			height: ''
 		} );
 		this.$element.attr( 'dir', 'ltr' );
-		this.link.attr( 'href', '' );
+		this.$link.attr( 'href', '' );
 		this.$copyright.attr( 'href', '' );
 		this.$historyLink.attr( 'href', '' );
 		this.$logo.empty();
