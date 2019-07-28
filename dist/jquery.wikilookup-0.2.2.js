@@ -455,6 +455,23 @@
 	};
 
 	/**
+	 * Reset widget data
+	 */
+	PageInfoWidget.prototype.resetData = function () {
+		this.$title.text( '' );
+		this.$content.text( '' );
+		this.$thumb.css( {
+			backgroundImage: '',
+			width: '',
+			height: ''
+		} );
+		this.$element.attr( 'dir', 'ltr' );
+		this.link.attr( 'href', '' );
+		this.$copyright.attr( 'href', '' );
+		this.$historyLink.attr( 'href', '' );
+		this.$logo.empty();
+	};
+	/**
 	 * Fill in the information with the data given
 	 *
 	 * @param  {Object} data Page data
