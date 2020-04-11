@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/mooeypoo/jquery.wikilookup.svg?branch=master)](https://travis-ci.com/mooeypoo/jquery.wikilookup)
+
 # Wikilookup
 Wikilookup is a JavaScript library that enables you to add quick information from Wikipedia and other wikis.
 
