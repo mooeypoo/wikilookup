@@ -2,7 +2,7 @@
 	/**
 	 * Page info widget
 	 *
-	 * @class $.wikilookup.PageInfoWidget
+	 * @class Wikilookup.PageInfoWidget
 	 *
 	 * @constructor
 	 * @param {Object} config Configuration options
@@ -15,7 +15,7 @@
 	 *    links back to the page's origins
 	 * @param {boolean} [dark] Toggle presentation in dark mode
 	 */
-	var PageInfoWidget = function ( config ) {
+	function PageInfoWidget( config ) {
 		config = config || {};
 
 		this.$element = config.$element || $( '<div>' );
@@ -46,7 +46,7 @@
 				this.$view,
 				this.$creditBar
 			);
-	};
+	}
 
 	/**
 	 * Toggle the widget to present in dark or light mode
@@ -251,5 +251,5 @@
 	};
 
 	// Export to namespace
-	$.wikilookup.PageInfoWidget = PageInfoWidget;
+	Wikilookup.PageInfoWidget = PageInfoWidget;
 }( jQuery ) );

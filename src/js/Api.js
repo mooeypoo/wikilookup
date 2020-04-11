@@ -2,7 +2,7 @@
 	/**
 	 * API class to fetch page information from the API, either by mediawiki api or restbase
 	 *
-	 * @class $.wikilookup.Api
+	 * @class Wikilookup.Api
 	 *
 	 * @constructor
 	 * @param {Object} [config] Configuration options
@@ -149,7 +149,7 @@
 		}
 
 		// Use the base mediawiki API
-		pages = $.wikilookup.tools.getPropValue( apiResult, [ 'query', 'pages' ] );
+		pages = Wikilookup.tools.getPropValue( apiResult, [ 'query', 'pages' ] );
 		data = pages[ Object.keys( pages )[ 0 ] ];
 
 		if ( !data ) {
@@ -260,5 +260,5 @@
 	};
 
 	// Export to namespace
-	$.wikilookup.Api = Api;
+	Wikilookup.Api = Api;
 }( jQuery ) );
