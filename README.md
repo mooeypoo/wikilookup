@@ -28,7 +28,7 @@ The view for each lookup word is stored in the `data-wl-widget` data attribute o
 See the demos for an example.
 
 ## Demo
-For information about the configuration, [visit the demo page](https://mooeypoo.github.io/jquery.wikilookup/).
+For information about the configuration, [visit the demo page](https://mooeypoo.github.io/wikilookup/).
 
 ## Contribute and help!
 jQuery.Wikilookup is an open source project. Please feel free to submit issues and/or pull requests.
