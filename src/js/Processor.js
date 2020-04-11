@@ -35,7 +35,7 @@
 	 *    links back to the page's origins
 	 * @param {boolean} [dark] Set the widget to dark mode
 	 */
-	var Processor = function ( $container, config ) {
+	function Processor( $container, config ) {
 		config = config || {};
 
 		this.$container = $container;
@@ -60,7 +60,7 @@
 		if ( config.prefetch ) {
 			this.updateAllNodes();
 		}
-	};
+	}
 
 	/**
 	 * Go over all nodes and trigger their update process.
@@ -94,7 +94,7 @@
 			$( this ).attr( 'data-wl-title', pageName.trim() );
 
 			// Create a view object and store it in a reference
-			widget = new $.wikilookup.PageInfoWidget( {
+			widget = new Wikilookup.PageInfoWidget( {
 				messages: self.messages,
 				hideThumb: self.hideThumb,
 				dark: self.dark
@@ -109,7 +109,7 @@
 	 * the default source.
 	 *
 	 * @param  {string} sourceName Requested source name
-	 * @return {$.wikilookup.Api} Source
+	 * @return {Wikilookup.Api} Source
 	 */
 	Processor.prototype.getSource = function ( sourceName ) {
 		sourceName = sourceName || 'default';
@@ -134,11 +134,11 @@
 
 		// Start with the default (this can be overridden, which is fine)
 		this.sources = {
-			'default': new $.wikilookup.Api()
+			'default': new Wikilookup.Api()
 		};
 
 		for ( def in sources ) {
-			this.sources[ def ] = new $.wikilookup.Api( sources[ def ] );
+			this.sources[ def ] = new Wikilookup.Api( sources[ def ] );
 		}
 	};
 
@@ -265,5 +265,5 @@
 	};
 
 	// Export to namespace
-	$.wikilookup.Processor = Processor;
+	Wikilookup.Processor = Processor;
 }( jQuery ) );

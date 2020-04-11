@@ -1,10 +1,12 @@
-# jQuery.wikilookup
-jQuery.wikilookup is a configurable jQuery extension that enables you to add quick information from Wikipedia and other wikis.
+[![Build Status](https://travis-ci.com/mooeypoo/jquery.wikilookup.svg?branch=master)](https://travis-ci.com/mooeypoo/jquery.wikilookup)
+
+# Wikilookup
+Wikilookup is a JavaScript library that enables you to add quick information from Wikipedia and other wikis.
 
 **Are you looking for the Wordpress plugin? [It's here!](https://github.com/mooeypoo/wikilookup-wordpress)**
 
 ## Use the plugin
-To use jQuery.wikilookup, include it in your page:
+To use Wikilookup, include it in your page:
 ```
 	<script src="../dist/jquery.wikilookup-1.0.0.js"></script>
 	<link rel="stylesheet" href="jquery.wikilookup-1.0.0.min.css">
@@ -21,7 +23,7 @@ You can change that property by providing an alternative selector:
 
 ## Showing the data
 
-jQuery.wikilookup manages the operation of fetching the data and creating a display, but it is agnostic as to where that display is placed. Deciding where the results appear is up to you.
+Wikilookup manages the operation of fetching the data and creating a display, but it is agnostic as to where that display is placed. Deciding where the results appear is up to you.
 
 The view for each lookup word is stored in the `data-wl-widget` data attribute of that node. The presentation jQuery object is stored in the `$element` property of that object. You can call for it and display it wherever you want.
 
@@ -31,7 +33,7 @@ See the demos for an example.
 For information about the configuration, [visit the demo page](https://mooeypoo.github.io/wikilookup/).
 
 ## Contribute and help!
-jQuery.Wikilookup is an open source project. Please feel free to submit issues and/or pull requests.
+Wikilookup is an open source project. Please feel free to submit issues and/or pull requests.
 
 ## Changelog
 See [CHANGELOG](CHANGELOG.md)
