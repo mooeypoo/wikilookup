@@ -1,5 +1,5 @@
 ( function () {
-	QUnit.module( '$.wikilookup.Processor' );
+	QUnit.module( 'Wikilookup.Processor' );
 
 	QUnit.test( 'initialization and getAllTerms', function ( assert ) {
 		var cases = [
@@ -24,7 +24,7 @@
 		];
 
 		cases.forEach( function ( testCase ) {
-			var processor = new $.wikilookup.Processor(
+			var processor = new Wikilookup.Processor(
 				$( $.parseHTML( testCase.html ) ),
 				testCase.config
 			);
@@ -39,7 +39,7 @@
 
 	QUnit.test( 'sources', function ( assert ) {
 		var source,
-			processor = new $.wikilookup.Processor( $( '<div>' ), {
+			processor = new Wikilookup.Processor( $( '<div>' ), {
 			sources: {
 				one: { lang: 'es' },
 				two: { baseURL: 'https://{{lang}}.privatewiki.com/w/api.php', lang: 'foo' },
@@ -55,7 +55,7 @@
 
 		source = processor.getSource( 'one' );
 		assert.ok(
-			source instanceof $.wikilookup.Api,
+			source instanceof Wikilookup.Api,
 			'API details instantiated.'
 		);
 	} );
