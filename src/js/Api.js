@@ -6,14 +6,14 @@
 	 *
 	 * @constructor
 	 * @param {Object} [config] Configuration options
-	 * @param {string} [config.lang] Language parameter, for dynamic base URLs {{lang}} variable
-	 * @param {string} [config.useRestbase] Use the restbase structure and expected response from the API.
+	 * @param {string} [config.lang='en'] Language parameter, for dynamic base URLs `{{lang}}` variable
+	 * @param {string} [config.useRestbase=false] Use the restbase structure and expected response from the API.
 	 *  Default value (false) means the expected API response and sent parameters conform to MediaWiki's internal
 	 *  API behavior.
 	 * @param {string} [config.baseURL] A set base url for the API endpoint. Can include two parameters that
-	 *  will be used:
-	 *  - '{{lang}}' Chosen language, in case the domain has variants, like https://{{lang}}.wikipedia.org
-	 *  - '{{pageName}}' Requested page name will be placed in that URL entrypoint. This is mostly relevant
+	 *  will be substituted:
+	 *  - `{{lang}}` Chosen language, in case the domain has variants, like `https://{{lang}}.wikipedia.org`
+	 *  - `{{pageName}}` Requested page name will be placed in that URL entrypoint. This is mostly relevant
 	 *    for restbase, which adds the page name parameter at the end of the request URL
 	 */
 	var Api = function ( config ) {
@@ -41,7 +41,7 @@
 				this.standardURLs.api;
 		}
 
-		this.isWikipedia = !!this.baseURL.match( /https:\/\/(.+)\.wikipedia.org/ );
+		this.isWikipedia = !!this.baseURL.match( /https:\/\/(.+)\.wikipedia\.org/ );
 	};
 
 	/**

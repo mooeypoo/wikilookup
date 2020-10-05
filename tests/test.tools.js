@@ -1,5 +1,5 @@
 ( function () {
-	QUnit.module( '$.wikilookup.tools' );
+	QUnit.module( 'Wikilookup.tools' );
 
 	QUnit.test( 'getPropValue', function ( assert ) {
 		var cases = [
@@ -37,7 +37,7 @@
 
 		cases.forEach( function ( testCase ) {
 			assert.deepEqual(
-				$.wikilookup.tools.getPropValue( testCase.obj, testCase.props ),
+				Wikilookup.tools.getPropValue( testCase.obj, testCase.props ),
 				testCase.expected,
 				testCase.msg
 			);

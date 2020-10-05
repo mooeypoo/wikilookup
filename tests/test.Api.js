@@ -1,5 +1,5 @@
 ( function () {
-	QUnit.module( '$.wikilookup.Api' );
+	QUnit.module( 'Wikilookup.Api' );
 
 	QUnit.test( 'getApiUrl', function ( assert ) {
 		var cases = [
@@ -48,7 +48,7 @@
 		];
 
 		cases.forEach( function ( testCase ) {
-			var api = new $.wikilookup.Api( { baseURL: testCase.baseURL } );
+			var api = new Wikilookup.Api( { baseURL: testCase.baseURL } );
 			assert.deepEqual(
 				api.getApiUrl( testCase.pageName, testCase.lang ),
 				testCase.expected,
@@ -156,7 +156,7 @@
 			];
 
 		cases.forEach( function ( testCase ) {
-			var api = new $.wikilookup.Api( testCase.construct );
+			var api = new Wikilookup.Api( testCase.construct );
 			assert.deepEqual(
 				api.getApiParams( testCase.pageName ),
 				testCase.expected,
@@ -196,7 +196,7 @@
 		];
 
 		cases.forEach( function ( testCase ) {
-			var api = new $.wikilookup.Api();
+			var api = new Wikilookup.Api();
 			assert.deepEqual(
 				api.getCacheKey( testCase.pageName, testCase.lang ),
 				testCase.expected,
@@ -256,14 +256,14 @@
 				restbase: {"type":"standard","title":"Physics","displaytitle":"Physics","namespace":{"id":0,"text":""},"wikibase_item":"Q413","titles":{"canonical":"Physics","normalized":"Physics","display":"Physics"},"pageid":22939,"thumbnail":{"source":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/CollageFisica.jpg/320px-CollageFisica.jpg","width":320,"height":231},"originalimage":{"source":"https://upload.wikimedia.org/wikipedia/commons/9/9a/CollageFisica.jpg","width":831,"height":600},"lang":"en","dir":"ltr","revision":"902734855","tid":"f71eb4a0-9785-11e9-80a0-4fab8e21055b","timestamp":"2019-06-20T21:42:30Z","description":"Study of the fundamental properties of matter and energy","content_urls":{"desktop":{"page":"https://en.wikipedia.org/wiki/Physics","revisions":"https://en.wikipedia.org/wiki/Physics?action=history","edit":"https://en.wikipedia.org/wiki/Physics?action=edit","talk":"https://en.wikipedia.org/wiki/Talk:Physics"},"mobile":{"page":"https://en.m.wikipedia.org/wiki/Physics","revisions":"https://en.m.wikipedia.org/wiki/Special:History/Physics","edit":"https://en.m.wikipedia.org/wiki/Physics?action=edit","talk":"https://en.m.wikipedia.org/wiki/Talk:Physics"}},"api_urls":{"summary":"https://en.wikipedia.org/api/rest_v1/page/summary/Physics","metadata":"https://en.wikipedia.org/api/rest_v1/page/metadata/Physics","references":"https://en.wikipedia.org/api/rest_v1/page/references/Physics","media":"https://en.wikipedia.org/api/rest_v1/page/media/Physics","edit_html":"https://en.wikipedia.org/api/rest_v1/page/html/Physics","talk_page_html":"https://en.wikipedia.org/api/rest_v1/page/html/Talk:Physics"},"extract":"Physics is the natural science that studies matter, its motion and behavior through space and time, and that studies the related entities of energy and force. Physics is one of the most fundamental scientific disciplines, and its main goal is to understand how the universe behaves.","extract_html":"<p><b>Physics</b> is the natural science that studies matter, its motion and behavior through space and time, and that studies the related entities of energy and force. Physics is one of the most fundamental scientific disciplines, and its main goal is to understand how the universe behaves.</p>"}
 			};
 
-		api = new $.wikilookup.Api( { useRestbase: true } );
+		api = new Wikilookup.Api( { useRestbase: true } );
 		assert.deepEqual(
 			api.processApiResult( apiResults.restbase ),
 			expected.restbase,
 			'Resetbase result'
 		);
 
-		api = new $.wikilookup.Api( { useRestbase: false } );
+		api = new Wikilookup.Api( { useRestbase: false } );
 		assert.deepEqual(
 			api.processApiResult( apiResults.api ),
 			expected.api,
